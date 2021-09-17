@@ -1,19 +1,19 @@
-# gas-libs
+# Google Form Concatenator
 
-my google apps script libraries
+A library to concatenate multiple Google Forms responses into one single Google Sheet.
 
-## Content
+## Library identifier
 
-1. [Template](https://github.com/ashtonfei/gas-libs/tree/template)
-
-## About this library
+```bash
+GoogleFormConcatenator
+```
 
 ## Library id
 
 Copy below library id and [Add a library to your script project](https://developers.google.com/apps-script/guides/libraries#add_a_library_to_your_script_project)
 
 ```bash
-# choose the libraries from the branches
+1cBqlDtJNXBbx4PBldiCN0NvjrGu6lciHSHUs43G5S0O0xSlR5Wbbk1W0
 ```
 
 ## Commands
@@ -41,3 +41,8 @@ Open apps script porject
 ```bash
 npm run open
 ```
+
+## YouTube
+
+[Library Introduction](https://youtube.com/ashtonfei)
+[Ashton Fei's YouTube Channel](https://youtube.com/ashtonfei)
