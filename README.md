@@ -10,22 +10,34 @@ my google apps script libraries
 
 ## Library id
 
+Copy below library id and [Add a library to your script project](https://developers.google.com/apps-script/guides/libraries#add_a_library_to_your_script_project)
+
 ```bash
 # choose the libraries from the branches
 ```
 
 ## Commands
 
+Install node packages
+
 ```bash
-# install node packages
 npm install
+```
 
-# build the library
+Build the library
+
+```bash
 npm run build
+```
 
-# push src code to apps script project
+Push src code to apps script project
+
+```bash
 npm run push
+```
 
-# open apps script porject
+Open apps script porject
+
+```bash
 npm run open
 ```
