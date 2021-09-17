@@ -4,7 +4,7 @@ my google apps script libraries
 
 ## Content
 
-1. [GoogleFormConcatenator]()
+1. [Template](https://github.com/ashtonfei/gas-libs/tree/template)
 
 ## About this library
 
@@ -25,4 +25,7 @@ npm run build
 
 # push src code to apps script project
 npm run push
+
+# open apps script porject
+npm run open
 ```
