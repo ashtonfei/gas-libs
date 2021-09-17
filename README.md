@@ -1,28 +1,7 @@
-# gas-libs
+# Google Apps Script Libraries
 
-my google apps script libraries
+My google apps script libraries (source code is located in each brach per library).
 
 ## Content
 
-1. [GoogleFormConcatenator]()
-
-## About this library
-
-## Library id
-
-```bash
-# choose the libraries from the branches
-```
-
-## Commands
-
-```bash
-# install node packages
-npm install
-
-# build the library
-npm run build
-
-# push src code to apps script project
-npm run push
-```
+1. [GoogleFormConcatenator](https://github.com/ashtonfei/gas-libs/tree/GoogleFormConcatenator)
