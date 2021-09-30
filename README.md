@@ -1,11 +1,11 @@
-# Google Form Concatenator
+# DocPro
 
-A library to concatenate multiple Google Forms responses into one single Google Sheet.
+A library built with DocumentApp API.
 
 ## Library identifier
 
 ```bash
-GoogleFormConcatenator
+DocPro
 ```
 
 ## Library id
@@ -13,7 +13,7 @@ GoogleFormConcatenator
 Copy below library id and [Add a library to your script project](https://developers.google.com/apps-script/guides/libraries#add_a_library_to_your_script_project)
 
 ```bash
-1cBqlDtJNXBbx4PBldiCN0NvjrGu6lciHSHUs43G5S0O0xSlR5Wbbk1W0
+1vXUWSkiph-ShFNhgbodig7e4foq8YJiVWOSdlUsfLgf8jjKZhYX6K8JF
 ```
 
 ## Commands
