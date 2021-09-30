@@ -16,6 +16,10 @@ Copy below library id and [Add a library to your script project](https://develop
 1vXUWSkiph-ShFNhgbodig7e4foq8YJiVWOSdlUsfLgf8jjKZhYX6K8JF
 ```
 
+## Use the library in your project directly
+
+Download the file in the [dist/DocPro.gs](https://github.com/ashtonfei/gas-libs/blob/DocPro/dist/DocPro.gs).
+
 ## Commands
 
 Install node packages
