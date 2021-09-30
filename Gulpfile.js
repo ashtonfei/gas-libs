@@ -3,7 +3,7 @@ const expose = require('gulp-expose')
 const rename = require('gulp-rename')
 const del = require("del")
 
-const IDENTIFIER = "GoogleFormConcatenator"
+const IDENTIFIER = "DocPro"
 
 const build = function () {
     return src("src/*.js")
