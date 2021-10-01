@@ -4,8 +4,8 @@
   "description": "my google apps script libraries",
   "main": "index.js",
   "scripts": {
-    "build": "gulp build",
-    "doc": "jsdoc2md ./src/**/*.js > document.md",
+    "build": "gulp build; npm run doc",
+    "doc": "jsdoc2md ./src/**/*.js > DOCUMENT.md",
     "push": "cd src; clasp push",
     "pull": "cd src; clasp pull",
     "open": "cd src; clasp open"
