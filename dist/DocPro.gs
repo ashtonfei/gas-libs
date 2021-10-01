@@ -26,13 +26,13 @@
 */
 
 /**
- * @description Get the first paragraph in the document with a keyword
- * @example <caption>Get paragrahp with keyword 'Google'.</caption>
- * getParagraphByKeyword(doc, "Google");
+ * Get the first paragraph in the document with a keyword
+ * @example <caption>Get paragrahp with keyword 'Google'</caption>
+ * getParagraphByKeyword(doc, "Google")
  * 
  * @param {DocumentApp.Document} doc The DocumentApp.Document object
  * @param {string} keyword The keyword in the paragraph
- * @returns {(DocumentApp.Paragraph | undefined)} The DocumentApp.Paragraph object or undefined when keyword not found
+ * @returns {(DocumentApp.Paragraph | void)} The DocumentApp.Paragraph object or undefined when keyword not found
  */
 function getParagraphByKeyword(doc, keyword) {
     const body = doc.getBody()
@@ -41,15 +41,15 @@ function getParagraphByKeyword(doc, keyword) {
 }
 
 /**
- * Find the first table in the document with the value in a cell
- * example:
- * getTableByName(doc, "{{table}}", 0, 0)
+ * Get the first table in the document with the value in a cell
+ * @example <caption>Get table for keyword "Google" in table cell (0, 0)</caption>
+ * getTableByName(doc, "Google", 0, 0)
  * 
  * @param {DocumentApp.Document} doc The DocumentApp.Document object
- * @param {string} keyword The keyword in the paragraph
- * @param {number?} rowIndex The row index of the cell to be checked, default = 0
- * @param {number?} cellIndex The cell(column) index of the cell to be checked, default = 0
- * @returns {DocumentApp.Table} The DocumentApp.Paragraph object or undefined
+ * @param {string} keyword The keyword in the table
+ * @param {number} [rowIndex = 0] The row index of the cell to be checked, default = 0
+ * @param {number} [cellIndex = 0] The cell(column) index of the cell to be checked, default = 0
+ * @returns {(DocumentApp.Table | void)} The DocumentApp.Table object or undefined
  */
 function getTableByName(doc, name, rowIndex = 0, cellIndex = 0) {
     const body = doc.getBody()
@@ -61,19 +61,19 @@ function getTableByName(doc, name, rowIndex = 0, cellIndex = 0) {
  * 
  * @param {DocumentApp.Document} doc The DocumentApp.Document object 
  * @returns {blob} The PDF blob
+ * 
  */
 function exportDocToPdf(doc) {
     return doc.getAs("application/pdf").setName(`${doc.getName()}.pdf`)
 }
 
 /**
- * Replace Google Document body text with placeholder objects
- * 
- * example of placeholders, the object key is the text placeholder in the document
- * const placeholders = {
- *  "{{name}}": "Ashton Fei",
- *  "{{email}}": "ashton.fei@test.com",
- * }
+ * Replace Google Document body text with placeholders
+ * @example <caption>Replace {{name}} with "Google", {{gender}} with "Male"</caption>
+ * replaceTextPlaceholders(doc, {
+ *      "{{name}}": "Google",
+ *      "{{gender}}": "Male"
+ * })
  *
  * @param {DocumentApp.Document} doc The DocumentApp.Document object 
  * @param {object} placeholders The placeholder object
@@ -90,11 +90,16 @@ function replaceTextPlaceholders(doc, placeholders) {
 /**
  * Replace Google Document body image with placeholder objects
  * 
- * example of placeholders, the object key is the text placeholder in the document
+ * @example <caption>Replage placeholder "{{image}}" with image data</caption>
  * const placeholders = {
- *  "{{imageOne}}": {id: "1OoDd2ywDks3BMyd-3KvGIT8wL8_RmVLy", width: 200, height: 200}, // The id of the image file on your Google Drive
- *  "{{imageTow}}": {url: "https://images.unsplash.com/photo-1628191013085-990d39ec25b8?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2340&q=80", width: 200, height: 200}, // The URL of any public photo
+ *      "{{image}}": {
+ *          id: "IMAGE_FILE_ID", // For image on your Google Drive - optional
+ *          url: "https://publicimageurl", // For public image - optional
+ *          width: 300, // Width in pixel - optional
+ *          height: 300, // Height in pixel - optional
+ *      }
  * }
+ * replaceImagePlaceholders(doc, placeholders)
  *
  * @param {DocumentApp.Document} doc The DocumentApp.Document object 
  * @param {object} placeholders The placeholder object
@@ -113,17 +118,22 @@ function replaceImagePlaceholders(doc, placeholders) {
 
 /**
  * Insert image into Google Document body
- * example:
- * insertImage(doc, 1, {
- *    id: "", // for image on your google drive,
- *    url: "https://", for public images,
- *    width: 400, // optional
- *    height: 400, // optional 
- * })
+ * @example <caption>Insert image at line 1 with image data</caption>
+ * const imageData = {
+ *      id: "IMAGE_FILE_ID", // For image on your Google Drive - optional
+*       url: "https://publicimageurl", // For public image - optional
+ *      width: 300, // Width in pixel - optional
+ *      height: 300, // Height in pixel - optional
+ * }
+ * insertImage(doc, 1, imageData)
  * 
  * @param {DocumentApp.Document} doc The DocumentApp.Document object 
  * @param {number} index The child index where image should be inserted
  * @param {object} imageData The image data object
+ * @param {string} [imageData.id] The id of image file on Google Drive
+ * @param {string} [imageData.url] The url of public image
+ * @param {number} [imageData.width] The width in pixel
+ * @param {number} [imageData.height] The width in height
  * @returns {DocumentApp.InlineImage} The DocumentApp.Document object
  */
 function insertImage(doc, index, imageData) {
@@ -157,18 +167,16 @@ function insertImage(doc, index, imageData) {
 
 /**
  * Replace Google Document table with placeholder objects
- * example:
- * replaceTablePlaceholders(
- *  doc,
- *  {
- *    "{{tableOne}}": {
- *      values: [
- *        ["Name", "Email", "Gender"],
- *        ["Ashton Fei", "ashton.fei@test.com", "Male"],
- *      ]
- *    }
- *  }
- * )
+ * @example <caption>Replace table placeholder "Google" with table data</caption>
+ * const placeholders = {
+ *      Google:{
+ *          values: [
+ *              ["Name", "Email", "Gender"],
+ *              ["Google", "test@gmail.com", "Male"],
+ *          ]
+*       }
+ * }
+ * replaceTablePlaceholders(doc, tableData)
  * 
  * @param {DocumentApp.Document} doc The DocumentApp.Document object 
  * @param {object} placeholders The placeholder object
@@ -188,18 +196,19 @@ function replaceTablePlaceholders(doc, placeholders) {
 
 /**
  * Insert table into Google Document body
- * example:
- * insertTable(doc, 1, {
- *        values: [
- *            ["Name", "Email", "Gender"],
- *            ["Ashton Fei", "afei@test.com", "Male"],
- *        ] 
- * })
+ * @example <caption>Insert table at line 1 with table data</caption>
+ * const tableData = {
+ *      values: [
+ *          ["Name", "Email", "Gender"],
+ *          ["Google", "test@gmail.com", "Male"],
+ *      ]
+ * }
+ * insertTable(doc, 1, tableData)
  * 
  * @param {DocumentApp.Document} doc The DocumentApp.Document object 
  * @param {number} index The child index where table is inserted
  * @param {object} tableData The table data object
- * @param {array} tableData.values The table data values object
+ * @param {array} tableData.values The table data values array
  * @returns {DocumentApp.Table} The DocumentApp.Document object
  */
 function insertTable(doc, index, tableData) {
@@ -232,11 +241,12 @@ function pointToPixel(point) {
  * @returns {number} Number of points
  */
 function pixelToPoint(pixel) {
-    return MailApp.floor(pixel * 0.75)
+    return Math.floor(pixel * 0.75)
 }
 
 /**
- * Get the document page width with margins removed
+ * Get the document page width with margins left and right removed
+ * 
  * @param {DocumentApp.Document} doc The DocumentApp.Document object
  * @returns {number} Width in point 
  */
@@ -246,7 +256,8 @@ function getPageWidth(doc) {
 }
 
 /**
- * Get the document page height with margins removed
+ * Get the document page height with margins top and bottom removed
+ * 
  * @param {DocumentApp.Document} doc The DocumentApp.Document object
  * @returns {number} Height in point 
  */
