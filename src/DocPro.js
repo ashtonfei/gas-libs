@@ -134,6 +134,13 @@ function insertImage(doc, index, imageData) {
     const image = body.insertImage(index, imageBlob)
     if (width) image.setWidth(width)
     if (height) image.setHeight(height)
+    if (!(width && height)) {
+        const pageWidth = getPageWidth(doc)
+        const pageWidthPixels = pointToPixel(pageWidth)
+        const ratio = image.getHeight() / image.getWidth()
+        image.setWidth(pageWidthPixels)
+        image.setHeight(pageWidthPixels * ratio)
+    }
     return image
 }
 
@@ -236,14 +243,3 @@ function getPageHeight(doc) {
     const body = doc.getBody()
     return body.getPageHeight() - body.getMarginTop() - body.getMarginBotton()
 }
-
-
-
-
-
-
-
-
-
-
-

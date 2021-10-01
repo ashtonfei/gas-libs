@@ -19,7 +19,7 @@ getTableByName(doc, &quot;{{table}}&quot;, 0, 0)</p>
 <p>example of placeholders, the object key is the text placeholder in the document
 const placeholders = {
  &quot;{{name}}&quot;: &quot;Ashton Fei&quot;,
- &quot;{{email}}&quot;: &quot;<a href="mailto:&#97;&#x73;&#104;&#x74;&#111;&#110;&#46;&#102;&#101;&#105;&#x40;&#x74;&#101;&#115;&#x74;&#46;&#99;&#x6f;&#109;">&#97;&#x73;&#104;&#x74;&#111;&#110;&#46;&#102;&#101;&#105;&#x40;&#x74;&#101;&#115;&#x74;&#46;&#99;&#x6f;&#109;</a>&quot;,
+ &quot;{{email}}&quot;: &quot;<a href="mailto:&#x61;&#115;&#x68;&#x74;&#111;&#x6e;&#x2e;&#x66;&#x65;&#105;&#64;&#x74;&#101;&#115;&#116;&#46;&#99;&#111;&#109;">&#x61;&#115;&#x68;&#x74;&#111;&#x6e;&#x2e;&#x66;&#x65;&#105;&#64;&#x74;&#101;&#115;&#116;&#46;&#99;&#111;&#109;</a>&quot;,
 }</p>
 </dd>
 <dt><a href="#replaceImagePlaceholders">replaceImagePlaceholders(doc, placeholders)</a> ⇒ <code>DocumentApp.Document</code></dt>
@@ -49,7 +49,7 @@ replaceTablePlaceholders(
    &quot;{{tableOne}}&quot;: {
      values: [
        [&quot;Name&quot;, &quot;Email&quot;, &quot;Gender&quot;],
-       [&quot;Ashton Fei&quot;, &quot;<a href="mailto:&#97;&#x73;&#x68;&#x74;&#x6f;&#110;&#46;&#102;&#101;&#x69;&#64;&#x74;&#x65;&#115;&#116;&#46;&#x63;&#x6f;&#x6d;">&#97;&#x73;&#x68;&#x74;&#x6f;&#110;&#46;&#102;&#101;&#x69;&#64;&#x74;&#x65;&#115;&#116;&#46;&#x63;&#x6f;&#x6d;</a>&quot;, &quot;Male&quot;],
+       [&quot;Ashton Fei&quot;, &quot;<a href="mailto:&#97;&#115;&#104;&#116;&#111;&#110;&#x2e;&#x66;&#x65;&#105;&#x40;&#116;&#101;&#115;&#116;&#46;&#x63;&#x6f;&#x6d;">&#97;&#115;&#104;&#116;&#111;&#110;&#x2e;&#x66;&#x65;&#105;&#x40;&#116;&#101;&#115;&#116;&#46;&#x63;&#x6f;&#x6d;</a>&quot;, &quot;Male&quot;],
      ]
    }
  }
@@ -61,7 +61,7 @@ example:
 insertTable(doc, 1, {
        values: [
            [&quot;Name&quot;, &quot;Email&quot;, &quot;Gender&quot;],
-           [&quot;Ashton Fei&quot;, &quot;<a href="mailto:&#97;&#x66;&#101;&#x69;&#64;&#x74;&#x65;&#115;&#116;&#46;&#99;&#111;&#x6d;">&#97;&#x66;&#101;&#x69;&#64;&#x74;&#x65;&#115;&#116;&#46;&#99;&#111;&#x6d;</a>&quot;, &quot;Male&quot;],
+           [&quot;Ashton Fei&quot;, &quot;<a href="mailto:&#x61;&#x66;&#x65;&#105;&#x40;&#x74;&#101;&#115;&#x74;&#x2e;&#99;&#111;&#x6d;">&#x61;&#x66;&#x65;&#105;&#x40;&#x74;&#101;&#115;&#x74;&#x2e;&#99;&#111;&#x6d;</a>&quot;, &quot;Male&quot;],
        ] 
 })</p>
 </dd>
