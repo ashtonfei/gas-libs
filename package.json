@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "gulp build",
-    "doc": "gulp doc",
+    "doc": "jsdoc2md ./src/**/*.js > document.md",
     "push": "cd src; clasp push",
     "pull": "cd src; clasp pull",
     "open": "cd src; clasp open"
@@ -36,6 +36,7 @@
     "gulp-expose": "^0.0.7",
     "gulp-jsdoc3": "^3.0.0",
     "gulp-rename": "^2.0.0",
-    "jsdoc": "^3.6.7"
+    "jsdoc": "^3.6.7",
+    "jsdoc-to-markdown": "^7.0.1"
   }
 }
