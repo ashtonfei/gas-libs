@@ -52,5 +52,5 @@ npm run open
 
 ## YouTube
 
-[Library Introduction](https://youtu.be/r6RUa86aGk4)
-[Ashton Fei's YouTube Channel](https://youtube.com/ashtonfei)
+- [Library Introduction](https://youtu.be/r6RUa86aGk4)
+- [Ashton Fei's YouTube Channel](https://youtube.com/ashtonfei)
