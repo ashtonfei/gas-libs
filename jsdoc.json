@@ -1,0 +1,14 @@
+{
+    "opts": {
+        "destination": "./docs/",
+        "verbose": true
+    },
+    "tags": {
+        "allowUnknownTags": false
+    },
+    "templates": {
+        "default": {
+            "outputSourceFiles": false
+        }
+    }
+}

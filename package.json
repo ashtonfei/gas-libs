@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "gulp",
+    "doc": "jsdoc -c jsdoc.json src/*.js README.md",
     "push": "cd src; clasp push",
     "pull": "cd src; clasp pull",
     "open": "cd src; clasp open"

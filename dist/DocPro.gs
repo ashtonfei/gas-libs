@@ -3,6 +3,29 @@
    var exports = module.exports;
    /****** code begin *********/
 /**
+* MIT License
+* Copyright (c) 2021 Ashton Fei
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+* 
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*/
+
+/**
  * Find the first paragraph in the document with a keyword
  * example:
  * getParagraphByKeyword(doc, "{{keyword}}")
@@ -65,6 +88,60 @@ function replaceTextPlaceholders(doc, placeholders) {
 }
 
 /**
+ * Replace Google Document body image with placeholder objects
+ * 
+ * example of placeholders, the object key is the text placeholder in the document
+ * const placeholders = {
+ *  "{{imageOne}}": {id: "1OoDd2ywDks3BMyd-3KvGIT8wL8_RmVLy", width: 200, height: 200}, // The id of the image file on your Google Drive
+ *  "{{imageTow}}": {url: "https://images.unsplash.com/photo-1628191013085-990d39ec25b8?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2340&q=80", width: 200, height: 200}, // The URL of any public photo
+ * }
+ *
+ * @param {DocumentApp.Document} doc The DocumentApp.Document object 
+ * @param {object} placeholders The placeholder object
+ * @return {DocumentApp.Document} The DocumentApp.Document object
+ */
+function replaceImagePlaceholders(doc, placeholders) {
+    const body = doc.getBody()
+    Object.entries(placeholders).forEach(([key, value]) => {
+        const p = getParagraphByKeyword(doc, key)
+        if (p) {
+            insertImage(doc, body.getChildIndex(p), value)
+            body.removeChild(p)
+        }
+    })
+}
+
+/**
+ * Insert image into Google Document body
+ * example:
+ * insertImage(doc, 1, {
+ *    id: "", // for image on your google drive,
+ *    url: "https://", for public images,
+ *    width: 400, // optional
+ *    height: 400, // optional 
+ * })
+ * 
+ * @param {DocumentApp.Document} doc The DocumentApp.Document object 
+ * @param {number} index The child index where image should be inserted
+ * @param {object} imageData The image data object
+ * @return {DocumentApp.InlineImage} The DocumentApp.Document object
+ */
+function insertImage(doc, index, imageData) {
+    const body = doc.getBody()
+    const { id, url, width, height } = imageData
+    let imageBlob
+    if (id) {
+        imageBlob = DriveApp.getFileById(id).getBlob()
+    } else if (url) {
+        imageBlob = UrlFetchApp.fetch(url).getBlob()
+    }
+    const image = body.insertImage(index, imageBlob)
+    if (width) image.setWidth(width)
+    if (height) image.setHeight(height)
+    return image
+}
+
+/**
  * Replace Google Document table with placeholder objects
  * example:
  * replaceTablePlaceholders(
@@ -99,15 +176,14 @@ function replaceTablePlaceholders(doc, placeholders) {
  * Insert table into Google Document body
  * example:
  * insertTable(doc, 1, {
- *    "{{tableOne}}": {
  *        values: [
  *            ["Name", "Email", "Gender"],
  *            ["Ashton Fei", "afei@test.com", "Male"],
  *        ] 
- *    }
  * })
  * 
  * @param {DocumentApp.Document} doc The DocumentApp.Document object 
+ * @param {number} index The child index where table is inserted
  * @param {object} tableData The table data object
  * @param {array} tableData.values The table data values object
  * @return {DocumentApp.Table} The DocumentApp.Document object
@@ -124,6 +200,57 @@ function insertTable(doc, index, tableData) {
     })
     return table
 }
+
+/**
+ * Convert document page point to pixel
+ * 
+ * @param {number} point Number of points
+ * @return {number} Number of pixels
+ */
+function pointToPixel(point) {
+    return Math.floor(point / 0.75)
+}
+
+/**
+ * Convert document page pixel to point
+ * 
+ * @param {number} point Number of pixels
+ * @return {number} Number of points
+ */
+function pixelToPoint(pixel) {
+    return MailApp.floor(pixel * 0.75)
+}
+
+/**
+ * Get the document page width with margins removed
+ * @param {DocumentApp.Document} doc The DocumentApp.Document object
+ * @return {number} Width in point 
+ */
+function getPageWidth(doc) {
+    const body = doc.getBody()
+    return body.getPageWidth() - body.getMarginLeft() - body.getMarginRight()
+}
+
+/**
+ * Get the document page height with margins removed
+ * @param {DocumentApp.Document} doc The DocumentApp.Document object
+ * @return {number} Height in point 
+ */
+function getPageHeight(doc) {
+    const body = doc.getBody()
+    return body.getPageHeight() - body.getMarginTop() - body.getMarginBotton()
+}
+
+
+
+
+
+
+
+
+
+
+
 
    /****** code end *********/
    ;(
