@@ -22,13 +22,13 @@
 */
 
 /**
- * Find the first paragraph in the document with a keyword
- * example:
- * getParagraphByKeyword(doc, "{{keyword}}")
+ * @description Get the first paragraph in the document with a keyword
+ * @example <caption>Get paragrahp with keyword 'Google'.</caption>
+ * getParagraphByKeyword(doc, "Google");
  * 
  * @param {DocumentApp.Document} doc The DocumentApp.Document object
  * @param {string} keyword The keyword in the paragraph
- * @return {DocumentApp.Paragraph} The DocumentApp.Paragraph object or undefined
+ * @returns {(DocumentApp.Paragraph | undefined)} The DocumentApp.Paragraph object or undefined when keyword not found
  */
 function getParagraphByKeyword(doc, keyword) {
     const body = doc.getBody()
@@ -45,7 +45,7 @@ function getParagraphByKeyword(doc, keyword) {
  * @param {string} keyword The keyword in the paragraph
  * @param {number?} rowIndex The row index of the cell to be checked, default = 0
  * @param {number?} cellIndex The cell(column) index of the cell to be checked, default = 0
- * @return {DocumentApp.Table} The DocumentApp.Paragraph object or undefined
+ * @returns {DocumentApp.Table} The DocumentApp.Paragraph object or undefined
  */
 function getTableByName(doc, name, rowIndex = 0, cellIndex = 0) {
     const body = doc.getBody()
@@ -56,7 +56,7 @@ function getTableByName(doc, name, rowIndex = 0, cellIndex = 0) {
  * Export Google Document to PDF
  * 
  * @param {DocumentApp.Document} doc The DocumentApp.Document object 
- * @return {blob} The PDF blob
+ * @returns {blob} The PDF blob
  */
 function exportDocToPdf(doc) {
     return doc.getAs("application/pdf").setName(`${doc.getName()}.pdf`)
@@ -73,7 +73,7 @@ function exportDocToPdf(doc) {
  *
  * @param {DocumentApp.Document} doc The DocumentApp.Document object 
  * @param {object} placeholders The placeholder object
- * @return {DocumentApp.Document} The DocumentApp.Document object
+ * @returns {DocumentApp.Document} The DocumentApp.Document object
  */
 function replaceTextPlaceholders(doc, placeholders) {
     const body = doc.getBody()
@@ -94,7 +94,7 @@ function replaceTextPlaceholders(doc, placeholders) {
  *
  * @param {DocumentApp.Document} doc The DocumentApp.Document object 
  * @param {object} placeholders The placeholder object
- * @return {DocumentApp.Document} The DocumentApp.Document object
+ * @returns {DocumentApp.Document} The DocumentApp.Document object
  */
 function replaceImagePlaceholders(doc, placeholders) {
     const body = doc.getBody()
@@ -120,7 +120,7 @@ function replaceImagePlaceholders(doc, placeholders) {
  * @param {DocumentApp.Document} doc The DocumentApp.Document object 
  * @param {number} index The child index where image should be inserted
  * @param {object} imageData The image data object
- * @return {DocumentApp.InlineImage} The DocumentApp.Document object
+ * @returns {DocumentApp.InlineImage} The DocumentApp.Document object
  */
 function insertImage(doc, index, imageData) {
     const body = doc.getBody()
@@ -132,12 +132,19 @@ function insertImage(doc, index, imageData) {
         imageBlob = UrlFetchApp.fetch(url).getBlob()
     }
     const image = body.insertImage(index, imageBlob)
-    if (width) image.setWidth(width)
-    if (height) image.setHeight(height)
-    if (!(width && height)) {
+    const ratio = image.getHeight() / image.getWidth()
+    if (width && height) {
+        image.setWidth(width)
+        image.setHeight(height)
+    } else if (width) {
+        image.setWidth(width)
+        image.setHeight(width * ratio)
+    } else if (height) {
+        image.setWidth(height / ratio)
+        image.setHeight(height)
+    } else {
         const pageWidth = getPageWidth(doc)
         const pageWidthPixels = pointToPixel(pageWidth)
-        const ratio = image.getHeight() / image.getWidth()
         image.setWidth(pageWidthPixels)
         image.setHeight(pageWidthPixels * ratio)
     }
@@ -161,7 +168,7 @@ function insertImage(doc, index, imageData) {
  * 
  * @param {DocumentApp.Document} doc The DocumentApp.Document object 
  * @param {object} placeholders The placeholder object
- * @return {DocumentApp.Document} The DocumentApp.Document object
+ * @returns {DocumentApp.Document} The DocumentApp.Document object
  */
 function replaceTablePlaceholders(doc, placeholders) {
     const body = doc.getBody()
@@ -189,7 +196,7 @@ function replaceTablePlaceholders(doc, placeholders) {
  * @param {number} index The child index where table is inserted
  * @param {object} tableData The table data object
  * @param {array} tableData.values The table data values object
- * @return {DocumentApp.Table} The DocumentApp.Document object
+ * @returns {DocumentApp.Table} The DocumentApp.Document object
  */
 function insertTable(doc, index, tableData) {
     const body = doc.getBody()
@@ -208,7 +215,7 @@ function insertTable(doc, index, tableData) {
  * Convert document page point to pixel
  * 
  * @param {number} point Number of points
- * @return {number} Number of pixels
+ * @returns {number} Number of pixels
  */
 function pointToPixel(point) {
     return Math.floor(point / 0.75)
@@ -218,7 +225,7 @@ function pointToPixel(point) {
  * Convert document page pixel to point
  * 
  * @param {number} point Number of pixels
- * @return {number} Number of points
+ * @returns {number} Number of points
  */
 function pixelToPoint(pixel) {
     return MailApp.floor(pixel * 0.75)
@@ -227,7 +234,7 @@ function pixelToPoint(pixel) {
 /**
  * Get the document page width with margins removed
  * @param {DocumentApp.Document} doc The DocumentApp.Document object
- * @return {number} Width in point 
+ * @returns {number} Width in point 
  */
 function getPageWidth(doc) {
     const body = doc.getBody()
@@ -237,7 +244,7 @@ function getPageWidth(doc) {
 /**
  * Get the document page height with margins removed
  * @param {DocumentApp.Document} doc The DocumentApp.Document object
- * @return {number} Height in point 
+ * @returns {number} Height in point 
  */
 function getPageHeight(doc) {
     const body = doc.getBody()

@@ -1,10 +1,8 @@
 ## Functions
 
 <dl>
-<dt><a href="#getParagraphByKeyword">getParagraphByKeyword(doc, keyword)</a> ⇒ <code>DocumentApp.Paragraph</code></dt>
-<dd><p>Find the first paragraph in the document with a keyword
-example:
-getParagraphByKeyword(doc, &quot;{{keyword}}&quot;)</p>
+<dt><a href="#getParagraphByKeyword">getParagraphByKeyword(doc, keyword)</a> ⇒ <code>DocumentApp.Paragraph</code> | <code>undefined</code></dt>
+<dd><p>Get the first paragraph in the document with a keyword</p>
 </dd>
 <dt><a href="#getTableByName">getTableByName(doc, keyword, rowIndex, cellIndex)</a> ⇒ <code>DocumentApp.Table</code></dt>
 <dd><p>Find the first table in the document with the value in a cell
@@ -19,7 +17,7 @@ getTableByName(doc, &quot;{{table}}&quot;, 0, 0)</p>
 <p>example of placeholders, the object key is the text placeholder in the document
 const placeholders = {
  &quot;{{name}}&quot;: &quot;Ashton Fei&quot;,
- &quot;{{email}}&quot;: &quot;<a href="mailto:&#x61;&#115;&#x68;&#x74;&#111;&#x6e;&#x2e;&#x66;&#x65;&#105;&#64;&#x74;&#101;&#115;&#116;&#46;&#99;&#111;&#109;">&#x61;&#115;&#x68;&#x74;&#111;&#x6e;&#x2e;&#x66;&#x65;&#105;&#64;&#x74;&#101;&#115;&#116;&#46;&#99;&#111;&#109;</a>&quot;,
+ &quot;{{email}}&quot;: &quot;<a href="mailto:&#97;&#x73;&#104;&#x74;&#x6f;&#x6e;&#x2e;&#102;&#x65;&#105;&#x40;&#116;&#101;&#115;&#x74;&#x2e;&#99;&#111;&#109;">&#97;&#x73;&#104;&#x74;&#x6f;&#x6e;&#x2e;&#102;&#x65;&#105;&#x40;&#116;&#101;&#115;&#x74;&#x2e;&#99;&#111;&#109;</a>&quot;,
 }</p>
 </dd>
 <dt><a href="#replaceImagePlaceholders">replaceImagePlaceholders(doc, placeholders)</a> ⇒ <code>DocumentApp.Document</code></dt>
@@ -49,7 +47,7 @@ replaceTablePlaceholders(
    &quot;{{tableOne}}&quot;: {
      values: [
        [&quot;Name&quot;, &quot;Email&quot;, &quot;Gender&quot;],
-       [&quot;Ashton Fei&quot;, &quot;<a href="mailto:&#97;&#115;&#104;&#116;&#111;&#110;&#x2e;&#x66;&#x65;&#105;&#x40;&#116;&#101;&#115;&#116;&#46;&#x63;&#x6f;&#x6d;">&#97;&#115;&#104;&#116;&#111;&#110;&#x2e;&#x66;&#x65;&#105;&#x40;&#116;&#101;&#115;&#116;&#46;&#x63;&#x6f;&#x6d;</a>&quot;, &quot;Male&quot;],
+       [&quot;Ashton Fei&quot;, &quot;<a href="mailto:&#97;&#115;&#104;&#x74;&#x6f;&#x6e;&#x2e;&#x66;&#101;&#x69;&#x40;&#x74;&#101;&#x73;&#x74;&#x2e;&#99;&#x6f;&#x6d;">&#97;&#115;&#104;&#x74;&#x6f;&#x6e;&#x2e;&#x66;&#101;&#x69;&#x40;&#x74;&#101;&#x73;&#x74;&#x2e;&#99;&#x6f;&#x6d;</a>&quot;, &quot;Male&quot;],
      ]
    }
  }
@@ -61,7 +59,7 @@ example:
 insertTable(doc, 1, {
        values: [
            [&quot;Name&quot;, &quot;Email&quot;, &quot;Gender&quot;],
-           [&quot;Ashton Fei&quot;, &quot;<a href="mailto:&#x61;&#x66;&#x65;&#105;&#x40;&#x74;&#101;&#115;&#x74;&#x2e;&#99;&#111;&#x6d;">&#x61;&#x66;&#x65;&#105;&#x40;&#x74;&#101;&#115;&#x74;&#x2e;&#99;&#111;&#x6d;</a>&quot;, &quot;Male&quot;],
+           [&quot;Ashton Fei&quot;, &quot;<a href="mailto:&#x61;&#x66;&#101;&#105;&#64;&#116;&#101;&#115;&#116;&#x2e;&#99;&#x6f;&#x6d;">&#x61;&#x66;&#101;&#105;&#64;&#116;&#101;&#115;&#116;&#x2e;&#99;&#x6f;&#x6d;</a>&quot;, &quot;Male&quot;],
        ] 
 })</p>
 </dd>
@@ -81,19 +79,21 @@ insertTable(doc, 1, {
 
 <a name="getParagraphByKeyword"></a>
 
-## getParagraphByKeyword(doc, keyword) ⇒ <code>DocumentApp.Paragraph</code>
-Find the first paragraph in the document with a keyword
-example:
-getParagraphByKeyword(doc, "{{keyword}}")
+## getParagraphByKeyword(doc, keyword) ⇒ <code>DocumentApp.Paragraph</code> \| <code>undefined</code>
+Get the first paragraph in the document with a keyword
 
 **Kind**: global function  
-**Returns**: <code>DocumentApp.Paragraph</code> - The DocumentApp.Paragraph object or undefined  
+**Returns**: <code>DocumentApp.Paragraph</code> \| <code>undefined</code> - The DocumentApp.Paragraph object or undefined when keyword not found  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | doc | <code>DocumentApp.Document</code> | The DocumentApp.Document object |
 | keyword | <code>string</code> | The keyword in the paragraph |
 
+**Example** *(Get paragrahp with keyword &#x27;Google&#x27;.)*  
+```js
+getParagraphByKeyword(doc, "Google");
+```
 <a name="getTableByName"></a>
 
 ## getTableByName(doc, keyword, rowIndex, cellIndex) ⇒ <code>DocumentApp.Table</code>
