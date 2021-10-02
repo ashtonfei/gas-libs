@@ -43,6 +43,8 @@ Create a new UI object
 
 **Kind**: global function  
 **Returns**: [<code>UI</code>](#UI) - The UI object  
+**Exampe**: <caption>Create a UI objet for app SheetPro</caption>
+const ui = new UI("SheetPro")  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -51,13 +53,13 @@ Create a new UI object
 
 * [UI([appName])](#UI) ⇒ [<code>UI</code>](#UI)
     * [.alert(message, [title])](#UI+alert) ⇒ <code>void</code>
-    * [.info(message, [title])](#UI+info) ⇒ <code>void</code>
-    * [.error(message, [title])](#UI+error) ⇒ <code>void</code>
-    * [.success(message, [title])](#UI+success) ⇒ <code>void</code>
+    * [.alertWithType(message, type)](#UI+alertWithType)
 
 <a name="UI+alert"></a>
 
 ### uI.alert(message, [title]) ⇒ <code>void</code>
+Show an alert message
+
 **Kind**: instance method of [<code>UI</code>](#UI)  
 
 | Param | Type | Default | Description |
@@ -65,33 +67,15 @@ Create a new UI object
 | message | <code>string</code> |  | The alert message |
 | [title] | <code>title</code> | <code>this.appName</code> | The alert title |
 
-<a name="UI+info"></a>
+<a name="UI+alertWithType"></a>
 
-### uI.info(message, [title]) ⇒ <code>void</code>
+### uI.alertWithType(message, type)
+Show an alert message with a message type in the alert title
+
 **Kind**: instance method of [<code>UI</code>](#UI)  
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| message | <code>string</code> |  | The info message |
-| [title] | <code>title</code> | <code>this.appName</code> | The info title |
-
-<a name="UI+error"></a>
-
-### uI.error(message, [title]) ⇒ <code>void</code>
-**Kind**: instance method of [<code>UI</code>](#UI)  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| message | <code>string</code> |  | The error message |
-| [title] | <code>title</code> | <code>this.appName</code> | The error title |
-
-<a name="UI+success"></a>
-
-### uI.success(message, [title]) ⇒ <code>void</code>
-**Kind**: instance method of [<code>UI</code>](#UI)  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| message | <code>string</code> |  | The success message |
-| [title] | <code>title</code> | <code>this.appName</code> | The success title |
+| Param | Type | Description |
+| --- | --- | --- |
+| message | <code>string</code> | The alert message |
+| type | <code>UI.ALERT\_TYPE</code> | The type of alert |
 

@@ -57,54 +57,43 @@ function getSelectedColumns() {
 /**
  * Create a new UI object
  * 
+ * @exampe <caption>Create a UI objet for app SheetPro</caption>
+ * const ui = new UI("SheetPro")
+ * 
  * @param {string} [appName = SheetPro] The name of your application
  * @returns {UI} The UI object
  */
 function UI(appName = "SheetPro") {
     this.appName = appName
     this.ui = SpreadsheetApp.getUi()
+    this.ALERT_TYPE = {
+      ALERT: "Alert",
+      WARNING: "Warning",
+      MESSAGE: "Message",
+      INFO: "Info",
+      ERROR: "Error",
+      SUCCESS: "Success",
+    }
 }
 
 /**
+ * Show an alert message
  * 
  * @param {string} message The alert message 
  * @param {title} [title=this.appName] The alert title
  * @return {void} 
  */
 UI.prototype.alert = function (message, title) {
-    title = title || `${appName}`
+    title = title || `${this.appName}`
     this.ui.alert(title, message, this.ui.ButtonSet.OK)
 }
 
 /**
+ * Show an alert message with a message type in the alert title
  * 
- * @param {string} message The info message 
- * @param {title} [title=this.appName] The info title
- * @return {void} 
+ * @param {string} message The alert message
+ * @param {UI.ALERT_TYPE} type The type of alert 
  */
-UI.prototype.info = function (message, title) {
-    title = title || `${this.appName} [Info]`
-    this.alert(message, title)
-}
-
-/**
- * 
- * @param {string} message The error message 
- * @param {title} [title=this.appName] The error title
- * @return {void} 
- */
-UI.prototype.error = function (message, title) {
-    title = title || `${this.appName} [Error]`
-    this.alert(message, title)
-}
-
-/**
- * 
- * @param {string} message The success message 
- * @param {title} [title=this.appName] The success title
- * @return {void} 
- */
-UI.prototype.success = function (message, title) {
-    title = title || `${this.appName} [Success]`
-    this.alert(message, title)
+UI.prototype.alertWithType = function(message, type=this.ALERT_TYPE.ALERT){
+  this.alert(message, `${this.appName} [${type}]`)
 }
