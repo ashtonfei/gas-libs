@@ -66,6 +66,13 @@ function getSelectedColumns() {
 function UI(appName = "SheetPro") {
     this.appName = appName
     this.ui = SpreadsheetApp.getUi()
+    /**@property {object} ALERT_TYPE The alert type object */
+    /**@property {string} ALERT_TYPE.ALERT=Alert Alert type */
+    /**@property {string} ALERT_TYPE.WARNING=Warning Warning type */
+    /**@property {string} ALERT_TYPE.MESSAGE=Message Message type */
+    /**@property {string} ALERT_TYPE.INFO=Info Info type */
+    /**@property {string} ALERT_TYPE.ERROR=Error Error type */
+    /**@property {string} ALERT_TYPE.SUCCESS=Success Success type */
     this.ALERT_TYPE = {
         ALERT: "Alert",
         WARNING: "Warning",

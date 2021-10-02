@@ -1,3 +1,10 @@
+## Members
+
+<dl>
+<dt><a href="#ALERT_TYPE">ALERT_TYPE</a></dt>
+<dd></dd>
+</dl>
+
 ## Functions
 
 <dl>
@@ -14,6 +21,16 @@
 <dd><p>Create a new UI object</p>
 </dd>
 </dl>
+
+<a name="ALERT_TYPE"></a>
+
+## ALERT\_TYPE
+**Kind**: global variable  
+**Properties**
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| ALERT_TYPE.SUCCESS | <code>string</code> | <code>&quot;Success&quot;</code> | Success type |
 
 <a name="getSelectedRanges"></a>
 
