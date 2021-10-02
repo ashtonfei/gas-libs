@@ -140,6 +140,7 @@ const ui = new UI("SheetPro")
 * [UI([appName])](#UI) ⇒ [<code>UI</code>](#UI)
     * [.alert(message, [title])](#UI+alert) ⇒ <code>void</code>
     * [.alertWithType(message, type)](#UI+alertWithType)
+    * [.confirm(message)](#UI+confirm) ⇒ <code>Button</code>
 
 <a name="UI+alert"></a>
 
@@ -164,4 +165,16 @@ Show an alert message with a message type in the alert title
 | --- | --- | --- |
 | message | <code>string</code> | The alert message |
 | type | <code>UI.ALERT\_TYPE</code> | The type of alert |
+
+<a name="UI+confirm"></a>
+
+### uI.confirm(message) ⇒ <code>Button</code>
+Send a confirmation message to end user
+
+**Kind**: instance method of [<code>UI</code>](#UI)  
+**Returns**: <code>Button</code> - The Button object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| message | <code>string</code> | The confirmation message |
 

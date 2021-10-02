@@ -103,3 +103,22 @@ UI.prototype.alert = function (message, title = this.appName) {
 UI.prototype.alertWithType = function (message, type = this.ALERT_TYPE.ALERT) {
     this.alert(message, `${this.appName} [${type}]`)
 }
+
+/**
+ * Send a confirmation message to end user
+ * 
+ * @param {string} message The confirmation message 
+ * @returns {Button} The Button object
+ */
+UI.prototype.confirm = function (message) {
+    return this.ui.alert(`${this.appName} [Comfirmation]`, message, this.ui.ButtonSet.YES_NO)
+}
+
+if (typeof module === "object") {
+    module.exports = {
+        getSelectedRanges,
+        getSelectedRows,
+        getSelectedColumns,
+        UI,
+    }
+}
