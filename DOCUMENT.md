@@ -28,6 +28,75 @@
 **Kind**: global variable  
 **Properties**
 
+| Name | Type | Description |
+| --- | --- | --- |
+| ALERT_TYPE | <code>object</code> | The alert type object |
+
+
+* [ALERT_TYPE](#ALERT_TYPE)
+    * [.ALERT](#ALERT_TYPE.ALERT)
+    * [.WARNING](#ALERT_TYPE.WARNING)
+    * [.MESSAGE](#ALERT_TYPE.MESSAGE)
+    * [.INFO](#ALERT_TYPE.INFO)
+    * [.ERROR](#ALERT_TYPE.ERROR)
+    * [.SUCCESS](#ALERT_TYPE.SUCCESS)
+
+<a name="ALERT_TYPE.ALERT"></a>
+
+### ALERT_TYPE.ALERT
+**Kind**: static property of [<code>ALERT\_TYPE</code>](#ALERT_TYPE)  
+**Properties**
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| ALERT_TYPE.ALERT | <code>string</code> | <code>&quot;Alert&quot;</code> | Alert type |
+
+<a name="ALERT_TYPE.WARNING"></a>
+
+### ALERT_TYPE.WARNING
+**Kind**: static property of [<code>ALERT\_TYPE</code>](#ALERT_TYPE)  
+**Properties**
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| ALERT_TYPE.WARNING | <code>string</code> | <code>&quot;Warning&quot;</code> | Warning type |
+
+<a name="ALERT_TYPE.MESSAGE"></a>
+
+### ALERT_TYPE.MESSAGE
+**Kind**: static property of [<code>ALERT\_TYPE</code>](#ALERT_TYPE)  
+**Properties**
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| ALERT_TYPE.MESSAGE | <code>string</code> | <code>&quot;Message&quot;</code> | Message type |
+
+<a name="ALERT_TYPE.INFO"></a>
+
+### ALERT_TYPE.INFO
+**Kind**: static property of [<code>ALERT\_TYPE</code>](#ALERT_TYPE)  
+**Properties**
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| ALERT_TYPE.INFO | <code>string</code> | <code>&quot;Info&quot;</code> | Info type |
+
+<a name="ALERT_TYPE.ERROR"></a>
+
+### ALERT_TYPE.ERROR
+**Kind**: static property of [<code>ALERT\_TYPE</code>](#ALERT_TYPE)  
+**Properties**
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| ALERT_TYPE.ERROR | <code>string</code> | <code>&quot;Error&quot;</code> | Error type |
+
+<a name="ALERT_TYPE.SUCCESS"></a>
+
+### ALERT_TYPE.SUCCESS
+**Kind**: static property of [<code>ALERT\_TYPE</code>](#ALERT_TYPE)  
+**Properties**
+
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | ALERT_TYPE.SUCCESS | <code>string</code> | <code>&quot;Success&quot;</code> | Success type |
