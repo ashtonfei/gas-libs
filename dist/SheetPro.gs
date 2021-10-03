@@ -57,6 +57,36 @@ function getSelectedColumns() {
     return ranges.filter(range => rowNotationRegex.test(range.getA1Notation()))
 }
 
+/**
+ * Get the link to the cell 
+ *
+ * @param {number} row The number of cell row
+ * @param {number} column The number of cell column
+ * @param {SpreadsheetApp.Sheet} [sheet=SpreadsheetApp.getActiveSheet()] The sheet
+ * @param {SpreadsheetApp.Spreadsheet} [spreadsheet=SpreadsheetApp.getActive()] The spreadsheet 
+ * @returns {string} The link to the cell
+ */
+function getCellLink(row, column, sheet = SpreadsheetApp.getActiveSheet(), spreadsheet = SpreadsheetApp.getActive()) {
+    const a1notation = SpreadsheetApp.getActiveSheet().getRange(row, column).getA1Notation()
+    const sheetId = sheet.getSheetId()
+    const spreadsheetId = spreadsheet.getId()
+    return `https://docs.google.com/spreadsheets/d/${spreadsheetId}/edit#gid=${sheetId}&range=${a1notation}`
+}
+
+/**
+ * Get the link to the cell name
+ *
+ * @param {string} a1notation The a1 notation of the cell
+ * @param {SpreadsheetApp.Sheet} [sheet=SpreadsheetApp.getActiveSheet()] The sheet
+ * @param {SpreadsheetApp.Spreadsheet} [spreadsheet=SpreadsheetApp.getActive()] The spreadsheet 
+ * @returns {string} The link to the cell
+ */
+function getCellLinkByName(a1notation, sheet = SpreadsheetApp.getActiveSheet(), spreadsheet = SpreadsheetApp.getActive()) {
+    const sheetId = sheet.getSheetId()
+    const spreadsheetId = spreadsheet.getId()
+    return `https://docs.google.com/spreadsheets/d/${spreadsheetId}/edit#gid=${sheetId}&range=${a1notation}`
+}
+
 
 /**
  * Create a new UI object
@@ -123,6 +153,8 @@ if (typeof module === "object") {
         getSelectedRanges,
         getSelectedRows,
         getSelectedColumns,
+        getCellLink,
+        getCellLinkByName,
         UI,
     }
 }

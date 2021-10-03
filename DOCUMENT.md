@@ -17,6 +17,12 @@
 <dt><a href="#getSelectedColumns">getSelectedColumns()</a> ⇒ <code>Array.&lt;SpreadsheetApp.Range&gt;</code></dt>
 <dd><p>Get selected columns</p>
 </dd>
+<dt><a href="#getCellLink">getCellLink(row, column, [sheet], [spreadsheet])</a> ⇒ <code>string</code></dt>
+<dd><p>Get the link to the cell</p>
+</dd>
+<dt><a href="#getCellLinkByName">getCellLinkByName(a1notation, [sheet], [spreadsheet])</a> ⇒ <code>string</code></dt>
+<dd><p>Get the link to the cell name</p>
+</dd>
 <dt><a href="#UI">UI([appName])</a> ⇒ <code><a href="#UI">UI</a></code></dt>
 <dd><p>Create a new UI object</p>
 </dd>
@@ -122,6 +128,35 @@ Get selected columns
 
 **Kind**: global function  
 **Returns**: <code>Array.&lt;SpreadsheetApp.Range&gt;</code> - An array of selected columns  
+<a name="getCellLink"></a>
+
+## getCellLink(row, column, [sheet], [spreadsheet]) ⇒ <code>string</code>
+Get the link to the cell
+
+**Kind**: global function  
+**Returns**: <code>string</code> - The link to the cell  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| row | <code>number</code> |  | The number of cell row |
+| column | <code>number</code> |  | The number of cell column |
+| [sheet] | <code>SpreadsheetApp.Sheet</code> | <code>SpreadsheetApp.getActiveSheet()</code> | The sheet |
+| [spreadsheet] | <code>SpreadsheetApp.Spreadsheet</code> | <code>SpreadsheetApp.getActive()</code> | The spreadsheet |
+
+<a name="getCellLinkByName"></a>
+
+## getCellLinkByName(a1notation, [sheet], [spreadsheet]) ⇒ <code>string</code>
+Get the link to the cell name
+
+**Kind**: global function  
+**Returns**: <code>string</code> - The link to the cell  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| a1notation | <code>string</code> |  | The a1 notation of the cell |
+| [sheet] | <code>SpreadsheetApp.Sheet</code> | <code>SpreadsheetApp.getActiveSheet()</code> | The sheet |
+| [spreadsheet] | <code>SpreadsheetApp.Spreadsheet</code> | <code>SpreadsheetApp.getActive()</code> | The spreadsheet |
+
 <a name="UI"></a>
 
 ## UI([appName]) ⇒ [<code>UI</code>](#UI)

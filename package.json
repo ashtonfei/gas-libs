@@ -6,9 +6,9 @@
   "scripts": {
     "build": "gulp build; npm run doc",
     "doc": "jsdoc2md ./src/**/*.js > DOCUMENT.md",
-    "push": "cd src; clasp push",
-    "pull": "cd src; clasp pull",
-    "open": "cd src; clasp open"
+    "push": "cd ./src; clasp push",
+    "pull": "cd ./src; clasp pull",
+    "open": "cd ./src; clasp open"
   },
   "repository": {
     "type": "git",
