@@ -131,15 +131,17 @@ Insert table into Google Document body
 
 **Example** *(Insert table at line 1 with table data)*  
 ```js
+// https://developers.google.com/apps-script/reference/document/attribute#properties
 const tableData =
-     [
-         ["Name", "Email", "Gender"],
-         [
-             {value: "Google", bgColor: "#ff0000", link: "https://youtube.com", style: {FOREGROUND_COLOR: "#FFFFFF"} }, 
-             {value: "test@gmail.com", bgColor: "#ff0000"}, 
-             {value: "Male"}
-         ],
-     ]
+  [
+      [
+          {value: "Name", bgColor: "#FF0000", link: "https://youtube.com/ashtonfei", style: {FOREGROUND_COLOR: "#FFFFFF": BOLD: true}},
+          {value: "Email", bgColor: "#FF0000", style: {FOREGROUND_COLOR: "#FFFFFF": BOLD: true}},
+          {value: "Gender", bgColor: "#FF0000", style: {FOREGROUND_COLOR: "#FFFFFF": BOLD: true}}
+       ],
+       ["Ashton Fei", "test@gmail.com", "Male"],
+       ["Mia Fei", "test@gmail.com", "Female"],
+   ]
 insertTable(doc, 1, tableData)
 ```
 <a name="replaceTextPlaceholders"></a>
@@ -202,13 +204,19 @@ Replace Google Document table with placeholder objects
 
 **Example** *(Replace table placeholder &quot;Google&quot; with table data)*  
 ```js
+
+// https://developers.google.com/apps-script/reference/document/attribute#properties
 const placeholders = {
-     Google:{
-         values: [
-             ["Name", "Email", "Gender"],
-             ["Google", "test@gmail.com", "Male"],
+     Google:
+         [
+             [
+                 {value: "Name", bgColor: "#FF0000", link: "https://youtube.com/ashtonfei", style: {FOREGROUND_COLOR: "#FFFFFF": BOLD: true}},
+                 {value: "Email", bgColor: "#FF0000", style: {FOREGROUND_COLOR: "#FFFFFF": BOLD: true}},
+                 {value: "Gender", bgColor: "#FF0000", style: {FOREGROUND_COLOR: "#FFFFFF": BOLD: true}}
+             ],
+             ["Ashton Fei", "test@gmail.com", "Male"],
+             ["Mia Fei", "test@gmail.com", "Female"],
          ]
-      }
 }
 replaceTablePlaceholders(doc, tableData)
 ```

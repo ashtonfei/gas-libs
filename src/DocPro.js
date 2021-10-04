@@ -113,24 +113,27 @@ function insertImage(doc, index, imageData) {
 }
 
 /**
- * Insert table into Google Document body
- * @example <caption>Insert table at line 1 with table data</caption>
- * const tableData =
- *      [
- *          ["Name", "Email", "Gender"],
- *          [
- *              {value: "Google", bgColor: "#ff0000", link: "https://youtube.com", style: {FOREGROUND_COLOR: "#FFFFFF"} }, 
- *              {value: "test@gmail.com", bgColor: "#ff0000"}, 
- *              {value: "Male"}
- *          ],
- *      ]
- * insertTable(doc, 1, tableData)
- * 
- * @param {DocumentApp.Document} doc The DocumentApp.Document object 
- * @param {number} index The child index where table is inserted
- * @param {obejct[][]} tableData The table data array
- * @returns {DocumentApp.Table} The DocumentApp.Document object
- */
+* Insert table into Google Document body
+* @example <caption>Insert table at line 1 with table data</caption>
+
+* // https://developers.google.com/apps-script/reference/document/attribute#properties
+* const tableData =
+*   [
+*       [
+*           {value: "Name", bgColor: "#FF0000", link: "https://youtube.com/ashtonfei", style: {FOREGROUND_COLOR: "#FFFFFF": BOLD: true}},
+*           {value: "Email", bgColor: "#FF0000", style: {FOREGROUND_COLOR: "#FFFFFF": BOLD: true}},
+*           {value: "Gender", bgColor: "#FF0000", style: {FOREGROUND_COLOR: "#FFFFFF": BOLD: true}}
+*        ],
+*        ["Ashton Fei", "test@gmail.com", "Male"],
+*        ["Mia Fei", "test@gmail.com", "Female"],
+*    ]
+* insertTable(doc, 1, tableData)
+* 
+* @param {DocumentApp.Document} doc The DocumentApp.Document object 
+* @param {number} index The child index where table is inserted
+* @param {obejct[][]} tableData The table data array
+* @returns {DocumentApp.Table} The DocumentApp.Document object
+*/
 function insertTable(doc, index, tableData) {
     const body = doc.getBody()
     const table = body.insertTable(index)
@@ -203,13 +206,19 @@ function replaceImagePlaceholders(doc, placeholders) {
 /**
  * Replace Google Document table with placeholder objects
  * @example <caption>Replace table placeholder "Google" with table data</caption>
+ * 
+ * // https://developers.google.com/apps-script/reference/document/attribute#properties
  * const placeholders = {
- *      Google:{
- *          values: [
- *              ["Name", "Email", "Gender"],
- *              ["Google", "test@gmail.com", "Male"],
+ *      Google:
+ *          [
+ *              [
+ *                  {value: "Name", bgColor: "#FF0000", link: "https://youtube.com/ashtonfei", style: {FOREGROUND_COLOR: "#FFFFFF": BOLD: true}},
+ *                  {value: "Email", bgColor: "#FF0000", style: {FOREGROUND_COLOR: "#FFFFFF": BOLD: true}},
+ *                  {value: "Gender", bgColor: "#FF0000", style: {FOREGROUND_COLOR: "#FFFFFF": BOLD: true}}
+ *              ],
+ *              ["Ashton Fei", "test@gmail.com", "Male"],
+ *              ["Mia Fei", "test@gmail.com", "Female"],
  *          ]
-*       }
  * }
  * replaceTablePlaceholders(doc, tableData)
  * 
