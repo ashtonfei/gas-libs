@@ -64,55 +64,6 @@ function exportDocToPdf(doc) {
 }
 
 /**
- * Replace Google Document body text with placeholders
- * @example <caption>Replace {{name}} with "Google", {{gender}} with "Male"</caption>
- * replaceTextPlaceholders(doc, {
- *      "{{name}}": "Google",
- *      "{{gender}}": "Male"
- * })
- *
- * @param {DocumentApp.Document} doc The DocumentApp.Document object 
- * @param {object} placeholders The placeholder object
- * @returns {DocumentApp.Document} The DocumentApp.Document object
- */
-function replaceTextPlaceholders(doc, placeholders) {
-    const body = doc.getBody()
-    Object.entries(placeholders).forEach(([key, value]) => {
-        body.replaceText(key, value)
-    })
-    return doc
-}
-
-/**
- * Replace Google Document body image with placeholder objects
- * 
- * @example <caption>Replage placeholder "{{image}}" with image data</caption>
- * const placeholders = {
- *      "{{image}}": {
- *          id: "IMAGE_FILE_ID", // For image on your Google Drive - optional
- *          url: "https://publicimageurl", // For public image - optional
- *          width: 300, // Width in pixel - optional
- *          height: 300, // Height in pixel - optional
- *      }
- * }
- * replaceImagePlaceholders(doc, placeholders)
- *
- * @param {DocumentApp.Document} doc The DocumentApp.Document object 
- * @param {object} placeholders The placeholder object
- * @returns {DocumentApp.Document} The DocumentApp.Document object
- */
-function replaceImagePlaceholders(doc, placeholders) {
-    const body = doc.getBody()
-    Object.entries(placeholders).forEach(([key, value]) => {
-        const p = getParagraphByKeyword(doc, key)
-        if (p) {
-            insertImage(doc, body.getChildIndex(p), value)
-            body.removeChild(p)
-        }
-    })
-}
-
-/**
  * Insert image into Google Document body
  * @example <caption>Insert image at line 1 with image data</caption>
  * const imageData = {
@@ -162,35 +113,6 @@ function insertImage(doc, index, imageData) {
 }
 
 /**
- * Replace Google Document table with placeholder objects
- * @example <caption>Replace table placeholder "Google" with table data</caption>
- * const placeholders = {
- *      Google:{
- *          values: [
- *              ["Name", "Email", "Gender"],
- *              ["Google", "test@gmail.com", "Male"],
- *          ]
-*       }
- * }
- * replaceTablePlaceholders(doc, tableData)
- * 
- * @param {DocumentApp.Document} doc The DocumentApp.Document object 
- * @param {object} placeholders The placeholder object
- * @returns {DocumentApp.Document} The DocumentApp.Document object
- */
-function replaceTablePlaceholders(doc, placeholders) {
-    const body = doc.getBody()
-    Object.entries(placeholders).forEach(([key, value]) => {
-        const table = getTableByName(doc, key)
-        if (table) {
-            insertTable(doc, body.getChildIndex(table), value)
-            body.removeChild(table)
-        }
-    })
-    return doc
-}
-
-/**
  * Insert table into Google Document body
  * @example <caption>Insert table at line 1 with table data</caption>
  * const tableData =
@@ -227,6 +149,84 @@ function insertTable(doc, index, tableData) {
         })
     })
     return table
+}
+
+/**
+ * Replace Google Document body text with placeholders
+ * @example <caption>Replace {{name}} with "Google", {{gender}} with "Male"</caption>
+ * replaceTextPlaceholders(doc, {
+ *      "{{name}}": "Google",
+ *      "{{gender}}": "Male"
+ * })
+ *
+ * @param {DocumentApp.Document} doc The DocumentApp.Document object 
+ * @param {object} placeholders The placeholder object
+ * @returns {DocumentApp.Document} The DocumentApp.Document object
+ */
+function replaceTextPlaceholders(doc, placeholders) {
+    const body = doc.getBody()
+    Object.entries(placeholders).forEach(([key, value]) => {
+        body.replaceText(key, value)
+    })
+    return doc
+}
+
+/**
+ * Replace Google Document body image with placeholder objects
+ * 
+ * @example <caption>Replage placeholder "{{image}}" with image data</caption>
+ * const placeholders = {
+ *      "{{image}}": {
+ *          id: "IMAGE_FILE_ID", // For image on your Google Drive - optional
+ *          url: "https://publicimageurl", // For public image - optional
+ *          width: 300, // Width in pixel - optional
+ *          height: 300, // Height in pixel - optional
+ *      }
+ * }
+ * replaceImagePlaceholders(doc, placeholders)
+ *
+ * @param {DocumentApp.Document} doc The DocumentApp.Document object 
+ * @param {object} placeholders The placeholder object
+ * @returns {DocumentApp.Document} The DocumentApp.Document object
+ */
+function replaceImagePlaceholders(doc, placeholders) {
+    const body = doc.getBody()
+    Object.entries(placeholders).forEach(([key, value]) => {
+        const p = getParagraphByKeyword(doc, key)
+        if (p) {
+            insertImage(doc, body.getChildIndex(p), value)
+            body.removeChild(p)
+        }
+    })
+}
+
+/**
+ * Replace Google Document table with placeholder objects
+ * @example <caption>Replace table placeholder "Google" with table data</caption>
+ * const placeholders = {
+ *      Google:{
+ *          values: [
+ *              ["Name", "Email", "Gender"],
+ *              ["Google", "test@gmail.com", "Male"],
+ *          ]
+*       }
+ * }
+ * replaceTablePlaceholders(doc, tableData)
+ * 
+ * @param {DocumentApp.Document} doc The DocumentApp.Document object 
+ * @param {object} placeholders The placeholder object
+ * @returns {DocumentApp.Document} The DocumentApp.Document object
+ */
+function replaceTablePlaceholders(doc, placeholders) {
+    const body = doc.getBody()
+    Object.entries(placeholders).forEach(([key, value]) => {
+        const table = getTableByName(doc, key)
+        if (table) {
+            insertTable(doc, body.getChildIndex(table), value)
+            body.removeChild(table)
+        }
+    })
+    return doc
 }
 
 /**
@@ -269,4 +269,21 @@ function getPageWidth(doc) {
 function getPageHeight(doc) {
     const body = doc.getBody()
     return body.getPageHeight() - body.getMarginTop() - body.getMarginBotton()
+}
+
+if (typeof module === "object") {
+    module.exports = {
+        getParagraphByKeyword,
+        getTableByName,
+        replaceTextPlaceholders,
+        replaceImagePlaceholders,
+        replaceTablePlaceholders,
+        pointToPixel,
+        pixelToPoint,
+        exportDocToPdf,
+        getPageWidth,
+        getPageHeight,
+        insertImage,
+        insertTable,
+    }
 }

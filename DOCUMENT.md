@@ -10,20 +10,20 @@
 <dt><a href="#exportDocToPdf">exportDocToPdf(doc)</a> ⇒ <code>blob</code></dt>
 <dd><p>Export Google Document to PDF</p>
 </dd>
+<dt><a href="#insertImage">insertImage(doc, index, imageData)</a> ⇒ <code>DocumentApp.InlineImage</code></dt>
+<dd><p>Insert image into Google Document body</p>
+</dd>
+<dt><a href="#insertTable">insertTable(doc, index, tableData)</a> ⇒ <code>DocumentApp.Table</code></dt>
+<dd><p>Insert table into Google Document body</p>
+</dd>
 <dt><a href="#replaceTextPlaceholders">replaceTextPlaceholders(doc, placeholders)</a> ⇒ <code>DocumentApp.Document</code></dt>
 <dd><p>Replace Google Document body text with placeholders</p>
 </dd>
 <dt><a href="#replaceImagePlaceholders">replaceImagePlaceholders(doc, placeholders)</a> ⇒ <code>DocumentApp.Document</code></dt>
 <dd><p>Replace Google Document body image with placeholder objects</p>
 </dd>
-<dt><a href="#insertImage">insertImage(doc, index, imageData)</a> ⇒ <code>DocumentApp.InlineImage</code></dt>
-<dd><p>Insert image into Google Document body</p>
-</dd>
 <dt><a href="#replaceTablePlaceholders">replaceTablePlaceholders(doc, placeholders)</a> ⇒ <code>DocumentApp.Document</code></dt>
 <dd><p>Replace Google Document table with placeholder objects</p>
-</dd>
-<dt><a href="#insertTable">insertTable(doc, index, tableData)</a> ⇒ <code>DocumentApp.Table</code></dt>
-<dd><p>Insert table into Google Document body</p>
 </dd>
 <dt><a href="#pointToPixel">pointToPixel(point)</a> ⇒ <code>number</code></dt>
 <dd><p>Convert document page point to pixel</p>
@@ -87,6 +87,61 @@ Export Google Document to PDF
 | --- | --- | --- |
 | doc | <code>DocumentApp.Document</code> | The DocumentApp.Document object |
 
+<a name="insertImage"></a>
+
+## insertImage(doc, index, imageData) ⇒ <code>DocumentApp.InlineImage</code>
+Insert image into Google Document body
+
+**Kind**: global function  
+**Returns**: <code>DocumentApp.InlineImage</code> - The DocumentApp.Document object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| doc | <code>DocumentApp.Document</code> | The DocumentApp.Document object |
+| index | <code>number</code> | The child index where image should be inserted |
+| imageData | <code>object</code> | The image data object |
+| [imageData.id] | <code>string</code> | The id of image file on Google Drive |
+| [imageData.url] | <code>string</code> | The url of public image |
+| [imageData.width] | <code>number</code> | The width in pixel |
+| [imageData.height] | <code>number</code> | The width in height |
+
+**Example** *(Insert image at line 1 with image data)*  
+```js
+const imageData = {
+     id: "IMAGE_FILE_ID", // For image on your Google Drive - optional
+      url: "https://publicimageurl", // For public image - optional
+     width: 300, // Width in pixel - optional
+     height: 300, // Height in pixel - optional
+}
+insertImage(doc, 1, imageData)
+```
+<a name="insertTable"></a>
+
+## insertTable(doc, index, tableData) ⇒ <code>DocumentApp.Table</code>
+Insert table into Google Document body
+
+**Kind**: global function  
+**Returns**: <code>DocumentApp.Table</code> - The DocumentApp.Document object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| doc | <code>DocumentApp.Document</code> | The DocumentApp.Document object |
+| index | <code>number</code> | The child index where table is inserted |
+| tableData | <code>Array.&lt;Array.&lt;obejct&gt;&gt;</code> | The table data array |
+
+**Example** *(Insert table at line 1 with table data)*  
+```js
+const tableData =
+     [
+         ["Name", "Email", "Gender"],
+         [
+             {value: "Google", bgColor: "#ff0000", link: "https://youtube.com", style: {FOREGROUND_COLOR: "#FFFFFF"} }, 
+             {value: "test@gmail.com", bgColor: "#ff0000"}, 
+             {value: "Male"}
+         ],
+     ]
+insertTable(doc, 1, tableData)
+```
 <a name="replaceTextPlaceholders"></a>
 
 ## replaceTextPlaceholders(doc, placeholders) ⇒ <code>DocumentApp.Document</code>
@@ -132,34 +187,6 @@ const placeholders = {
 }
 replaceImagePlaceholders(doc, placeholders)
 ```
-<a name="insertImage"></a>
-
-## insertImage(doc, index, imageData) ⇒ <code>DocumentApp.InlineImage</code>
-Insert image into Google Document body
-
-**Kind**: global function  
-**Returns**: <code>DocumentApp.InlineImage</code> - The DocumentApp.Document object  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| doc | <code>DocumentApp.Document</code> | The DocumentApp.Document object |
-| index | <code>number</code> | The child index where image should be inserted |
-| imageData | <code>object</code> | The image data object |
-| [imageData.id] | <code>string</code> | The id of image file on Google Drive |
-| [imageData.url] | <code>string</code> | The url of public image |
-| [imageData.width] | <code>number</code> | The width in pixel |
-| [imageData.height] | <code>number</code> | The width in height |
-
-**Example** *(Insert image at line 1 with image data)*  
-```js
-const imageData = {
-     id: "IMAGE_FILE_ID", // For image on your Google Drive - optional
-      url: "https://publicimageurl", // For public image - optional
-     width: 300, // Width in pixel - optional
-     height: 300, // Height in pixel - optional
-}
-insertImage(doc, 1, imageData)
-```
 <a name="replaceTablePlaceholders"></a>
 
 ## replaceTablePlaceholders(doc, placeholders) ⇒ <code>DocumentApp.Document</code>
@@ -184,33 +211,6 @@ const placeholders = {
       }
 }
 replaceTablePlaceholders(doc, tableData)
-```
-<a name="insertTable"></a>
-
-## insertTable(doc, index, tableData) ⇒ <code>DocumentApp.Table</code>
-Insert table into Google Document body
-
-**Kind**: global function  
-**Returns**: <code>DocumentApp.Table</code> - The DocumentApp.Document object  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| doc | <code>DocumentApp.Document</code> | The DocumentApp.Document object |
-| index | <code>number</code> | The child index where table is inserted |
-| tableData | <code>Array.&lt;Array.&lt;obejct&gt;&gt;</code> | The table data array |
-
-**Example** *(Insert table at line 1 with table data)*  
-```js
-const tableData =
-     [
-         ["Name", "Email", "Gender"],
-         [
-             {value: "Google", bgColor: "#ff0000", link: "https://youtube.com", style: {FOREGROUND_COLOR: "#FFFFFF"} }, 
-             {value: "test@gmail.com", bgColor: "#ff0000"}, 
-             {value: "Male"}
-         ],
-     ]
-insertTable(doc, 1, tableData)
 ```
 <a name="pointToPixel"></a>
 
