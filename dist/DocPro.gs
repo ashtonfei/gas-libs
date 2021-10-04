@@ -197,28 +197,37 @@ function replaceTablePlaceholders(doc, placeholders) {
 /**
  * Insert table into Google Document body
  * @example <caption>Insert table at line 1 with table data</caption>
- * const tableData = {
- *      values: [
+ * const tableData =
+ *      [
  *          ["Name", "Email", "Gender"],
- *          ["Google", "test@gmail.com", "Male"],
+ *          [
+ *              {value: "Google", bgColor: "#ff0000", link: "https://youtube.com", style: {FOREGROUND_COLOR: "#FFFFFF"} }, 
+ *              {value: "test@gmail.com", bgColor: "#ff0000"}, 
+ *              {value: "Male"}
+ *          ],
  *      ]
- * }
  * insertTable(doc, 1, tableData)
  * 
  * @param {DocumentApp.Document} doc The DocumentApp.Document object 
  * @param {number} index The child index where table is inserted
- * @param {object} tableData The table data object
- * @param {array} tableData.values The table data values array
+ * @param {obejct[][]} tableData The table data array
  * @returns {DocumentApp.Table} The DocumentApp.Document object
  */
 function insertTable(doc, index, tableData) {
     const body = doc.getBody()
-    const { values } = tableData
     const table = body.insertTable(index)
-    values.forEach((value, rowIndex) => {
+    tableData.forEach((value, rowIndex) => {
         const row = table.insertTableRow(rowIndex)
-        value.forEach((cell, colIndex) => {
-            row.insertTableCell(colIndex).setText(cell)
+        value.forEach((cell, columnIndex) => {
+            const tableCell = row.insertTableCell(columnIndex)
+            if (typeof cell === "object") {
+                if (cell.hasOwnProperty("value")) tableCell.setText(cell.value)
+                if (cell.hasOwnProperty("bgColor")) tableCell.setBackgroundColor(cell.bgColor)
+                if (cell.hasOwnProperty("link")) tableCell.setLinkUrl(cell.link)
+                if (cell.hasOwnProperty("style")) tableCell.setAttributes(cell.style)
+            } else {
+                tableCell.setText(cell)
+            }
         })
     })
     return table

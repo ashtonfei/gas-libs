@@ -197,17 +197,19 @@ Insert table into Google Document body
 | --- | --- | --- |
 | doc | <code>DocumentApp.Document</code> | The DocumentApp.Document object |
 | index | <code>number</code> | The child index where table is inserted |
-| tableData | <code>object</code> | The table data object |
-| tableData.values | <code>array</code> | The table data values array |
+| tableData | <code>Array.&lt;Array.&lt;obejct&gt;&gt;</code> | The table data array |
 
 **Example** *(Insert table at line 1 with table data)*  
 ```js
-const tableData = {
-     values: [
+const tableData =
+     [
          ["Name", "Email", "Gender"],
-         ["Google", "test@gmail.com", "Male"],
+         [
+             {value: "Google", bgColor: "#ff0000", link: "https://youtube.com", style: {FOREGROUND_COLOR: "#FFFFFF"} }, 
+             {value: "test@gmail.com", bgColor: "#ff0000"}, 
+             {value: "Male"}
+         ],
      ]
-}
 insertTable(doc, 1, tableData)
 ```
 <a name="pointToPixel"></a>
