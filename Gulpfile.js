@@ -3,7 +3,7 @@ const expose = require('gulp-expose')
 const rename = require('gulp-rename')
 const del = require("del")
 
-const IDENTIFIER = "DocPro"
+const IDENTIFIER = "SlidePro"
 
 const build = function () {
     return src("src/*.js")

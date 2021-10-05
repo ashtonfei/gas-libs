@@ -1,11 +1,11 @@
-# DocPro
+# SlidePro
 
-A library built with DocumentApp API.
+A library built with SlideApp API.
 
 ## Library identifier
 
 ```bash
-DocPro
+SlidePro
 ```
 
 ## Library id
@@ -18,11 +18,11 @@ Copy below library id and [Add a library to your script project](https://develop
 
 ## Use the library in your project directly
 
-Download the file in the [dist/DocPro.gs](https://github.com/ashtonfei/gas-libs/blob/DocPro/dist/DocPro.gs).
+Download the file in the [dist/SlidePro.gs](https://github.com/ashtonfei/gas-libs/blob/SlidePro/dist/SlidePro.gs).
 
 ## Document
 
-[Document](https://github.com/ashtonfei/gas-libs/blob/DocPro/DOCUMENT.md)
+[Document](https://github.com/ashtonfei/gas-libs/blob/SlidePro/DOCUMENT.md)
 
 ## Commands
 

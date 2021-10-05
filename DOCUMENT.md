@@ -1,270 +1,179 @@
 ## Functions
 
 <dl>
-<dt><a href="#getParagraphByKeyword">getParagraphByKeyword(doc, keyword)</a> ⇒ <code>DocumentApp.Paragraph</code> | <code>void</code></dt>
-<dd><p>Get the first paragraph in the document with a keyword</p>
+<dt><a href="#getImageByTitle">getImageByTitle(presentation, The)</a> ⇒ <code>SlidesApp.Image</code> | <code>void</code></dt>
+<dd><p>Get the first image by the title</p>
 </dd>
-<dt><a href="#getTableByName">getTableByName(doc, keyword, [rowIndex], [cellIndex])</a> ⇒ <code>DocumentApp.Table</code> | <code>void</code></dt>
-<dd><p>Get the first table in the document with the value in a cell</p>
+<dt><a href="#getImagesByTitle">getImagesByTitle(presentation, The)</a> ⇒ <code>Array.&lt;SlidesApp.Image&gt;</code></dt>
+<dd><p>Get all images by the title</p>
 </dd>
-<dt><a href="#exportDocToPdf">exportDocToPdf(doc)</a> ⇒ <code>blob</code></dt>
-<dd><p>Export Google Document to PDF</p>
+<dt><a href="#getTableByHeader">getTableByHeader(presentation, header, [row], [column])</a> ⇒ <code>SlidesApp.Table</code> | <code>void</code></dt>
+<dd><p>Get the first table by header text</p>
 </dd>
-<dt><a href="#insertImage">insertImage(doc, index, imageData)</a> ⇒ <code>DocumentApp.InlineImage</code></dt>
-<dd><p>Insert image into Google Document body</p>
+<dt><a href="#getTablesByHeader">getTablesByHeader(presentation, header, [row], [column])</a> ⇒ <code>Array.&lt;SlidesApp.Table&gt;</code></dt>
+<dd><p>Get all tables by header text</p>
 </dd>
-<dt><a href="#insertTable">insertTable(doc, index, tableData)</a> ⇒ <code>DocumentApp.Table</code></dt>
-<dd><p>Insert table into Google Document body</p>
+<dt><a href="#updateImage">updateImage(image, data)</a> ⇒ <code>SlidesApp.Image</code></dt>
+<dd><p>Update an image with image data</p>
 </dd>
-<dt><a href="#replaceTextPlaceholders">replaceTextPlaceholders(doc, placeholders)</a> ⇒ <code>DocumentApp.Document</code></dt>
-<dd><p>Replace Google Document body text with placeholders</p>
+<dt><a href="#updateTable">updateTable(table, data)</a></dt>
+<dd><p>Update a table with table data</p>
 </dd>
-<dt><a href="#replaceImagePlaceholders">replaceImagePlaceholders(doc, placeholders)</a> ⇒ <code>DocumentApp.Document</code></dt>
-<dd><p>Replace Google Document body image with placeholder objects</p>
+<dt><a href="#replaceTextPlaceholders">replaceTextPlaceholders(presentation, placeholders)</a> ⇒ <code>SlidesApp.Presentation</code></dt>
+<dd><p>Replace text placeholders for the all slides in the presentation</p>
 </dd>
-<dt><a href="#replaceTablePlaceholders">replaceTablePlaceholders(doc, placeholders)</a> ⇒ <code>DocumentApp.Document</code></dt>
-<dd><p>Replace Google Document table with placeholder objects</p>
+<dt><a href="#replaceImagePlaceholders">replaceImagePlaceholders(presentation, placeholders)</a> ⇒ <code>SlidesApp.Presentation</code></dt>
+<dd><p>Replace image placeholders for the all slides in the presentation</p>
 </dd>
-<dt><a href="#pointToPixel">pointToPixel(point)</a> ⇒ <code>number</code></dt>
-<dd><p>Convert document page point to pixel</p>
-</dd>
-<dt><a href="#pixelToPoint">pixelToPoint(point)</a> ⇒ <code>number</code></dt>
-<dd><p>Convert document page pixel to point</p>
-</dd>
-<dt><a href="#getPageWidth">getPageWidth(doc)</a> ⇒ <code>number</code></dt>
-<dd><p>Get the document page width with margins left and right removed</p>
-</dd>
-<dt><a href="#getPageHeight">getPageHeight(doc)</a> ⇒ <code>number</code></dt>
-<dd><p>Get the document page height with margins top and bottom removed</p>
+<dt><a href="#replaceTablePlaceholders">replaceTablePlaceholders(presentation, placeholders)</a> ⇒ <code>SlidesApp.Presentation</code></dt>
+<dd><p>Update table placeholders for all slides in the presentation</p>
 </dd>
 </dl>
 
-<a name="getParagraphByKeyword"></a>
+<a name="getImageByTitle"></a>
 
-## getParagraphByKeyword(doc, keyword) ⇒ <code>DocumentApp.Paragraph</code> \| <code>void</code>
-Get the first paragraph in the document with a keyword
+## getImageByTitle(presentation, The) ⇒ <code>SlidesApp.Image</code> \| <code>void</code>
+Get the first image by the title
 
 **Kind**: global function  
-**Returns**: <code>DocumentApp.Paragraph</code> \| <code>void</code> - The DocumentApp.Paragraph object or undefined when keyword not found  
+**Returns**: <code>SlidesApp.Image</code> \| <code>void</code> - The first SlidesApp.Image or undefined  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| doc | <code>DocumentApp.Document</code> | The DocumentApp.Document object |
-| keyword | <code>string</code> | The keyword in the paragraph |
+| presentation | <code>SlidesApp.Presentation</code> | The SlidesApp.Presentation object |
+| The | <code>string</code> | title of the image in the slide |
 
-**Example** *(Get paragrahp with keyword &#x27;Google&#x27;)*  
-```js
-getParagraphByKeyword(doc, "Google")
-```
-<a name="getTableByName"></a>
+<a name="getImagesByTitle"></a>
 
-## getTableByName(doc, keyword, [rowIndex], [cellIndex]) ⇒ <code>DocumentApp.Table</code> \| <code>void</code>
-Get the first table in the document with the value in a cell
+## getImagesByTitle(presentation, The) ⇒ <code>Array.&lt;SlidesApp.Image&gt;</code>
+Get all images by the title
 
 **Kind**: global function  
-**Returns**: <code>DocumentApp.Table</code> \| <code>void</code> - The DocumentApp.Table object or undefined  
+**Returns**: <code>Array.&lt;SlidesApp.Image&gt;</code> - An array of SlidesApp.Image  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| presentation | <code>SlidesApp.Presentation</code> | The SlidesApp.Presentation object |
+| The | <code>string</code> | title of the image in the slide |
+
+<a name="getTableByHeader"></a>
+
+## getTableByHeader(presentation, header, [row], [column]) ⇒ <code>SlidesApp.Table</code> \| <code>void</code>
+Get the first table by header text
+
+**Kind**: global function  
+**Returns**: <code>SlidesApp.Table</code> \| <code>void</code> - The first SlidesApp.Table or undefined  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
-| doc | <code>DocumentApp.Document</code> |  | The DocumentApp.Document object |
-| keyword | <code>string</code> |  | The keyword in the table |
-| [rowIndex] | <code>number</code> | <code>0</code> | The row index of the cell to be checked, default = 0 |
-| [cellIndex] | <code>number</code> | <code>0</code> | The cell(column) index of the cell to be checked, default = 0 |
+| presentation | <code>SlidesApp.Presentation</code> |  | The SlidesApp.Presentation object |
+| header | <code>string</code> |  | The text of the header |
+| [row] | <code>number</code> | <code>1</code> | The row number of the header |
+| [column] | <code>number</code> | <code>1</code> | The column number of the header |
 
-**Example** *(Get table for keyword &quot;Google&quot; in table cell (0, 0))*  
-```js
-getTableByName(doc, "Google", 0, 0)
-```
-<a name="exportDocToPdf"></a>
+<a name="getTablesByHeader"></a>
 
-## exportDocToPdf(doc) ⇒ <code>blob</code>
-Export Google Document to PDF
+## getTablesByHeader(presentation, header, [row], [column]) ⇒ <code>Array.&lt;SlidesApp.Table&gt;</code>
+Get all tables by header text
 
 **Kind**: global function  
-**Returns**: <code>blob</code> - The PDF blob  
+**Returns**: <code>Array.&lt;SlidesApp.Table&gt;</code> - An array of SlidesApp.Table  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| presentation | <code>SlidesApp.Presentation</code> |  | The SlidesApp.Presentation object |
+| header | <code>string</code> |  | The text of the header |
+| [row] | <code>number</code> | <code>1</code> | The row number of the header |
+| [column] | <code>number</code> | <code>1</code> | The column number of the header |
+
+<a name="updateImage"></a>
+
+## updateImage(image, data) ⇒ <code>SlidesApp.Image</code>
+Update an image with image data
+
+**Kind**: global function  
+**Returns**: <code>SlidesApp.Image</code> - The SlidesApp.Image object after updated  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| doc | <code>DocumentApp.Document</code> | The DocumentApp.Document object |
+| image | <code>SlidesApp.Image</code> | The SlidesApp.Image object |
+| data | <code>object</code> | The image data object |
+| [data.id] | <code>string</code> | The id of image on Google Drive |
+| [data.url] | <code>string</code> | The url of public image |
+| [data.link] | <code>string</code> | The url to be linked to the image |
+| [data.crop] | <code>boolean</code> | Crop the image |
 
-<a name="insertImage"></a>
+<a name="updateTable"></a>
 
-## insertImage(doc, index, imageData) ⇒ <code>DocumentApp.InlineImage</code>
-Insert image into Google Document body
+## updateTable(table, data)
+Update a table with table data
 
 **Kind**: global function  
-**Returns**: <code>DocumentApp.InlineImage</code> - The DocumentApp.Document object  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| doc | <code>DocumentApp.Document</code> | The DocumentApp.Document object |
-| index | <code>number</code> | The child index where image should be inserted |
-| imageData | <code>object</code> | The image data object |
-| [imageData.id] | <code>string</code> | The id of image file on Google Drive |
-| [imageData.url] | <code>string</code> | The url of public image |
-| [imageData.width] | <code>number</code> | The width in pixel |
-| [imageData.height] | <code>number</code> | The width in height |
+| table | <code>SlidesApp.Table</code> | The SlidesApp.Table object |
+| data | <code>Array.&lt;Array.&lt;object&gt;&gt;</code> | The table data object |
+| [data[][].value] | <code>string</code> \| <code>number</code> | The value of the table cell |
+| [data[][].color] | <code>string</code> | The font color of the table cell |
+| [data[][].bgColor] | <code>string</code> | The background color of the table cell |
+| [data[][].link] | <code>string</code> | The url to be linked to the cell |
 
-**Example** *(Insert image at line 1 with image data)*  
-```js
-const imageData = {
-     id: "IMAGE_FILE_ID", // For image on your Google Drive - optional
-      url: "https://publicimageurl", // For public image - optional
-     width: 300, // Width in pixel - optional
-     height: 300, // Height in pixel - optional
-}
-insertImage(doc, 1, imageData)
-```
-<a name="insertTable"></a>
-
-## insertTable(doc, index, tableData) ⇒ <code>DocumentApp.Table</code>
-Insert table into Google Document body
-
-**Kind**: global function  
-**Returns**: <code>DocumentApp.Table</code> - The DocumentApp.Document object  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| doc | <code>DocumentApp.Document</code> | The DocumentApp.Document object |
-| index | <code>number</code> | The child index where table is inserted |
-| tableData | <code>Array.&lt;Array.&lt;obejct&gt;&gt;</code> | The table data array |
-
-**Example** *(Insert table at line 1 with table data)*  
-```js
-// https://developers.google.com/apps-script/reference/document/attribute#properties
-const tableData =
-  [
-      [
-          {value: "Name", bgColor: "#FF0000", link: "https://youtube.com/ashtonfei", style: {FOREGROUND_COLOR: "#FFFFFF": BOLD: true}},
-          {value: "Email", bgColor: "#FF0000", style: {FOREGROUND_COLOR: "#FFFFFF": BOLD: true}},
-          {value: "Gender", bgColor: "#FF0000", style: {FOREGROUND_COLOR: "#FFFFFF": BOLD: true}}
-       ],
-       ["Ashton Fei", "test@gmail.com", "Male"],
-       ["Mia Fei", "test@gmail.com", "Female"],
-   ]
-insertTable(doc, 1, tableData)
-```
 <a name="replaceTextPlaceholders"></a>
 
-## replaceTextPlaceholders(doc, placeholders) ⇒ <code>DocumentApp.Document</code>
-Replace Google Document body text with placeholders
+## replaceTextPlaceholders(presentation, placeholders) ⇒ <code>SlidesApp.Presentation</code>
+Replace text placeholders for the all slides in the presentation
 
 **Kind**: global function  
-**Returns**: <code>DocumentApp.Document</code> - The DocumentApp.Document object  
+**Returns**: <code>SlidesApp.Presentation</code> - The SlidesApp.Presentation object after udpate  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| doc | <code>DocumentApp.Document</code> | The DocumentApp.Document object |
-| placeholders | <code>object</code> | The placeholder object |
+| presentation | <code>SlidesApp.Presentation</code> | The SlidesApp.Presentation object |
+| placeholders | <code>object</code> | The text placeholders object |
 
-**Example** *(Replace {{name}} with &quot;Google&quot;, {{gender}} with &quot;Male&quot;)*  
+**Example** *(Replace {{name}} with &quot;Google&quot; in all slides)*  
 ```js
-replaceTextPlaceholders(doc, {
-     "{{name}}": "Google",
-     "{{gender}}": "Male"
-})
+const presentation = SlidesApp.getActivePresentation()
+const placeholders = {
+ "{{name}}": "Google",
+}
+replaceTextPlaceholders(presentation, placeholders)
 ```
 <a name="replaceImagePlaceholders"></a>
 
-## replaceImagePlaceholders(doc, placeholders) ⇒ <code>DocumentApp.Document</code>
-Replace Google Document body image with placeholder objects
+## replaceImagePlaceholders(presentation, placeholders) ⇒ <code>SlidesApp.Presentation</code>
+Replace image placeholders for the all slides in the presentation
 
 **Kind**: global function  
-**Returns**: <code>DocumentApp.Document</code> - The DocumentApp.Document object  
+**Returns**: <code>SlidesApp.Presentation</code> - The SlidesApp.Presentation object after udpate  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| doc | <code>DocumentApp.Document</code> | The DocumentApp.Document object |
-| placeholders | <code>object</code> | The placeholder object |
+| presentation | <code>SlidesApp.Presentation</code> | The SlidesApp.Presentation object |
+| placeholders | <code>object</code> | The image placeholders object |
 
-**Example** *(Replage placeholder &quot;{{image}}&quot; with image data)*  
+**Example** *(Replace image with title {{logo}} with image from url https://fakeimageurl)*  
 ```js
+const presentation = SlidesApp.getActivePresentation()
 const placeholders = {
-     "{{image}}": {
-         id: "IMAGE_FILE_ID", // For image on your Google Drive - optional
-         url: "https://publicimageurl", // For public image - optional
-         width: 300, // Width in pixel - optional
-         height: 300, // Height in pixel - optional
-     }
+ "{{logo}}": {
+     url: "https://fakeimageurl",
+     id: null,
+     crop: true,
+  }
 }
-replaceImagePlaceholders(doc, placeholders)
 ```
 <a name="replaceTablePlaceholders"></a>
 
-## replaceTablePlaceholders(doc, placeholders) ⇒ <code>DocumentApp.Document</code>
-Replace Google Document table with placeholder objects
+## replaceTablePlaceholders(presentation, placeholders) ⇒ <code>SlidesApp.Presentation</code>
+Update table placeholders for all slides in the presentation
 
 **Kind**: global function  
-**Returns**: <code>DocumentApp.Document</code> - The DocumentApp.Document object  
+**Returns**: <code>SlidesApp.Presentation</code> - The SlidesApp.Presentation object after udpate  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| doc | <code>DocumentApp.Document</code> | The DocumentApp.Document object |
-| placeholders | <code>object</code> | The placeholder object |
-
-**Example** *(Replace table placeholder &quot;Google&quot; with table data)*  
-```js
-
-// https://developers.google.com/apps-script/reference/document/attribute#properties
-const placeholders = {
-     Google:
-         [
-             [
-                 {value: "Name", bgColor: "#FF0000", link: "https://youtube.com/ashtonfei", style: {FOREGROUND_COLOR: "#FFFFFF": BOLD: true}},
-                 {value: "Email", bgColor: "#FF0000", style: {FOREGROUND_COLOR: "#FFFFFF": BOLD: true}},
-                 {value: "Gender", bgColor: "#FF0000", style: {FOREGROUND_COLOR: "#FFFFFF": BOLD: true}}
-             ],
-             ["Ashton Fei", "test@gmail.com", "Male"],
-             ["Mia Fei", "test@gmail.com", "Female"],
-         ]
-}
-replaceTablePlaceholders(doc, tableData)
-```
-<a name="pointToPixel"></a>
-
-## pointToPixel(point) ⇒ <code>number</code>
-Convert document page point to pixel
-
-**Kind**: global function  
-**Returns**: <code>number</code> - Number of pixels  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| point | <code>number</code> | Number of points |
-
-<a name="pixelToPoint"></a>
-
-## pixelToPoint(point) ⇒ <code>number</code>
-Convert document page pixel to point
-
-**Kind**: global function  
-**Returns**: <code>number</code> - Number of points  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| point | <code>number</code> | Number of pixels |
-
-<a name="getPageWidth"></a>
-
-## getPageWidth(doc) ⇒ <code>number</code>
-Get the document page width with margins left and right removed
-
-**Kind**: global function  
-**Returns**: <code>number</code> - Width in point  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| doc | <code>DocumentApp.Document</code> | The DocumentApp.Document object |
-
-<a name="getPageHeight"></a>
-
-## getPageHeight(doc) ⇒ <code>number</code>
-Get the document page height with margins top and bottom removed
-
-**Kind**: global function  
-**Returns**: <code>number</code> - Height in point  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| doc | <code>DocumentApp.Document</code> | The DocumentApp.Document object |
+| presentation | <code>SlidesApp.Presentation</code> | The SlidesApp.Presentation object |
+| placeholders | <code>object</code> | The table placeholders object |
 
