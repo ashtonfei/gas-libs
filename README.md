@@ -13,7 +13,7 @@ SlidePro
 Copy below library id and [Add a library to your script project](https://developers.google.com/apps-script/guides/libraries#add_a_library_to_your_script_project)
 
 ```bash
-1vXUWSkiph-ShFNhgbodig7e4foq8YJiVWOSdlUsfLgf8jjKZhYX6K8JF
+1md6joupTQYKLYQhR4jUGJKIiup2udOGvMi20wLk-rLndpzLn_iNvWWTV
 ```
 
 ## Use the library in your project directly
