@@ -1,6 +1,9 @@
 ## Functions
 
 <dl>
+<dt><a href="#createDoc">createDoc(name, [attributes], [folder])</a> ⇒ <code>DocumentApp.Document</code></dt>
+<dd><p>Create a new Google Doc</p>
+</dd>
 <dt><a href="#getParagraphByKeyword">getParagraphByKeyword(doc, keyword)</a> ⇒ <code>DocumentApp.Paragraph</code> | <code>void</code></dt>
 <dd><p>Get the first paragraph in the document with a keyword</p>
 </dd>
@@ -38,6 +41,20 @@
 <dd><p>Get the document page height with margins top and bottom removed</p>
 </dd>
 </dl>
+
+<a name="createDoc"></a>
+
+## createDoc(name, [attributes], [folder]) ⇒ <code>DocumentApp.Document</code>
+Create a new Google Doc
+
+**Kind**: global function  
+**Returns**: <code>DocumentApp.Document</code> - The new Google Document  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | The name of the new Google Doucment file |
+| [attributes] | <code>object</code> | The Google Doc attribute object |
+| [folder] | <code>DriveApp.Folder</code> | The destination folder for the new doc to be created |
 
 <a name="getParagraphByKeyword"></a>
 
