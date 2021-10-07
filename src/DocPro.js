@@ -21,6 +21,45 @@
 * SOFTWARE.
 */
 
+
+/**
+ * Create a new Google Doc
+ * @param {string} name The name of the new Google Doucment file
+ * @param {object} [attributes] The Google Doc attribute object
+ * @param {DriveApp.Folder} [folder] The destination folder for the new doc to be created
+ * @returns {DocumentApp.Document} The new Google Document
+ */
+function createDoc(name, attributes = {}, folder) {
+  const doc = DocumentApp.create(name)
+  const body = doc.getBody()
+  Object.entries(attributes).forEach(([key, value]) => {
+    switch (key) {
+      case "width":
+        body.setPageWidth(value)
+        break
+      case "height":
+        body.setPageHeight(value)
+        break
+      case "marginTop":
+        body.setMarginTop(value)
+        break
+      case "marginRight":
+        body.setMarginRight(value)
+        break
+      case "marginBottom":
+        body.setMarginBottom(value)
+        break
+      case "marginLeft":
+        body.setMarginLeft(value)
+        break
+    }
+  })
+  if (folder) {
+    DriveApp.getFileById(doc.getId()).moveTo(folder)
+  }
+  return doc
+}
+
 /**
  * Get the first paragraph in the document with a keyword
  * @example <caption>Get paragrahp with keyword 'Google'</caption>
@@ -31,9 +70,9 @@
  * @returns {(DocumentApp.Paragraph | void)} The DocumentApp.Paragraph object or undefined when keyword not found
  */
 function getParagraphByKeyword(doc, keyword) {
-    const body = doc.getBody()
-    const element = body.findText(keyword)
-    if (element) return element.getElement().getParent().asParagraph()
+  const body = doc.getBody()
+  const element = body.findText(keyword)
+  if (element) return element.getElement().getParent().asParagraph()
 }
 
 /**
@@ -48,8 +87,8 @@ function getParagraphByKeyword(doc, keyword) {
  * @returns {(DocumentApp.Table | void)} The DocumentApp.Table object or undefined
  */
 function getTableByName(doc, name, rowIndex = 0, cellIndex = 0) {
-    const body = doc.getBody()
-    return body.getTables().find(table => table.getCell(rowIndex, cellIndex).getText() == name)
+  const body = doc.getBody()
+  return body.getTables().find(table => table.getCell(rowIndex, cellIndex).getText() == name)
 }
 
 /**
@@ -60,7 +99,7 @@ function getTableByName(doc, name, rowIndex = 0, cellIndex = 0) {
  * 
  */
 function exportDocToPdf(doc) {
-    return doc.getAs("application/pdf").setName(`${doc.getName()}.pdf`)
+  return doc.getAs("application/pdf").setName(`${doc.getName()}.pdf`)
 }
 
 /**
@@ -84,32 +123,32 @@ function exportDocToPdf(doc) {
  * @returns {DocumentApp.InlineImage} The DocumentApp.Document object
  */
 function insertImage(doc, index, imageData) {
-    const body = doc.getBody()
-    const { id, url, width, height } = imageData
-    let imageBlob
-    if (id) {
-        imageBlob = DriveApp.getFileById(id).getBlob()
-    } else if (url) {
-        imageBlob = UrlFetchApp.fetch(url).getBlob()
-    }
-    const image = body.insertImage(index, imageBlob)
-    const ratio = image.getHeight() / image.getWidth()
-    if (width && height) {
-        image.setWidth(width)
-        image.setHeight(height)
-    } else if (width) {
-        image.setWidth(width)
-        image.setHeight(width * ratio)
-    } else if (height) {
-        image.setWidth(height / ratio)
-        image.setHeight(height)
-    } else {
-        const pageWidth = getPageWidth(doc)
-        const pageWidthPixels = pointToPixel(pageWidth)
-        image.setWidth(pageWidthPixels)
-        image.setHeight(pageWidthPixels * ratio)
-    }
-    return image
+  const body = doc.getBody()
+  const { id, url, width, height } = imageData
+  let imageBlob
+  if (id) {
+    imageBlob = DriveApp.getFileById(id).getBlob()
+  } else if (url) {
+    imageBlob = UrlFetchApp.fetch(url).getBlob()
+  }
+  const image = body.insertImage(index, imageBlob)
+  const ratio = image.getHeight() / image.getWidth()
+  if (width && height) {
+    image.setWidth(width)
+    image.setHeight(height)
+  } else if (width) {
+    image.setWidth(width)
+    image.setHeight(width * ratio)
+  } else if (height) {
+    image.setWidth(height / ratio)
+    image.setHeight(height)
+  } else {
+    const pageWidth = getPageWidth(doc)
+    const pageWidthPixels = pointToPixel(pageWidth)
+    image.setWidth(pageWidthPixels)
+    image.setHeight(pageWidthPixels * ratio)
+  }
+  return image
 }
 
 /**
@@ -134,24 +173,31 @@ function insertImage(doc, index, imageData) {
 * @param {obejct[][]} tableData The table data array
 * @returns {DocumentApp.Table} The DocumentApp.Document object
 */
-function insertTable(doc, index, tableData) {
-    const body = doc.getBody()
-    const table = body.insertTable(index)
-    tableData.forEach((value, rowIndex) => {
-        const row = table.insertTableRow(rowIndex)
-        value.forEach((cell, columnIndex) => {
-            const tableCell = row.insertTableCell(columnIndex)
-            if (typeof cell === "object") {
-                if (cell.hasOwnProperty("value")) tableCell.setText(cell.value)
-                if (cell.hasOwnProperty("bgColor")) tableCell.setBackgroundColor(cell.bgColor)
-                if (cell.hasOwnProperty("link")) tableCell.setLinkUrl(cell.link)
-                if (cell.hasOwnProperty("style")) tableCell.setAttributes(cell.style)
-            } else {
-                tableCell.setText(cell)
-            }
-        })
+function insertTable(doc, index, tableData, fontSize) {
+  const body = doc.getBody()
+  const table = body.insertTable(index)
+  tableData.forEach((value, rowIndex) => {
+    const row = table.insertTableRow(rowIndex)
+    if (value[0].height) row.setMinimumHeight(value[0].height)
+    value.forEach((cell, columnIndex) => {
+      const tableCell = row.insertTableCell(columnIndex)
+      if (typeof cell === "object") {
+        if (cell.hasOwnProperty("value")) tableCell.setText(cell.value)
+        if (cell.hasOwnProperty("bgColor")) tableCell.setBackgroundColor(cell.bgColor)
+        if (cell.hasOwnProperty("link")) tableCell.setLinkUrl(cell.link)
+        if (cell.hasOwnProperty("style")) {
+          if (fontSize) cell.style[DocumentApp.Attribute.FONT_SIZE] = fontSize
+          tableCell.setAttributes(cell.style)
+        }
+        if (cell.hasOwnProperty("width")) tableCell.setWidth(cell.width)
+        if (cell.hasOwnProperty("verticalAlignment")) tableCell.setVerticalAlignment(cell.verticalAlignment)
+        
+      } else {
+        tableCell.setText(cell)
+      }
     })
-    return table
+  })
+  return table
 }
 
 /**
@@ -167,11 +213,11 @@ function insertTable(doc, index, tableData) {
  * @returns {DocumentApp.Document} The DocumentApp.Document object
  */
 function replaceTextPlaceholders(doc, placeholders) {
-    const body = doc.getBody()
-    Object.entries(placeholders).forEach(([key, value]) => {
-        body.replaceText(key, value)
-    })
-    return doc
+  const body = doc.getBody()
+  Object.entries(placeholders).forEach(([key, value]) => {
+    body.replaceText(key, value)
+  })
+  return doc
 }
 
 /**
@@ -193,14 +239,14 @@ function replaceTextPlaceholders(doc, placeholders) {
  * @returns {DocumentApp.Document} The DocumentApp.Document object
  */
 function replaceImagePlaceholders(doc, placeholders) {
-    const body = doc.getBody()
-    Object.entries(placeholders).forEach(([key, value]) => {
-        const p = getParagraphByKeyword(doc, key)
-        if (p) {
-            insertImage(doc, body.getChildIndex(p), value)
-            body.removeChild(p)
-        }
-    })
+  const body = doc.getBody()
+  Object.entries(placeholders).forEach(([key, value]) => {
+    const p = getParagraphByKeyword(doc, key)
+    if (p) {
+      insertImage(doc, body.getChildIndex(p), value)
+      body.removeChild(p)
+    }
+  })
 }
 
 /**
@@ -227,15 +273,15 @@ function replaceImagePlaceholders(doc, placeholders) {
  * @returns {DocumentApp.Document} The DocumentApp.Document object
  */
 function replaceTablePlaceholders(doc, placeholders) {
-    const body = doc.getBody()
-    Object.entries(placeholders).forEach(([key, value]) => {
-        const table = getTableByName(doc, key)
-        if (table) {
-            insertTable(doc, body.getChildIndex(table), value)
-            body.removeChild(table)
-        }
-    })
-    return doc
+  const body = doc.getBody()
+  Object.entries(placeholders).forEach(([key, value]) => {
+    const table = getTableByName(doc, key)
+    if (table) {
+      insertTable(doc, body.getChildIndex(table), value)
+      body.removeChild(table)
+    }
+  })
+  return doc
 }
 
 /**
@@ -245,7 +291,7 @@ function replaceTablePlaceholders(doc, placeholders) {
  * @returns {number} Number of pixels
  */
 function pointToPixel(point) {
-    return Math.floor(point / 0.75)
+  return Math.floor(point / 0.75)
 }
 
 /**
@@ -255,7 +301,23 @@ function pointToPixel(point) {
  * @returns {number} Number of points
  */
 function pixelToPoint(pixel) {
-    return Math.floor(pixel * 0.75)
+  return Math.floor(pixel * 0.75)
+}
+
+function centimeterToPixel(value) {
+  return Math.floor(ratio * 37.795275591)
+}
+
+function pixelToCentimeter(value) {
+  return Math.floor(value / 37.795275591)
+}
+
+function centimeterToPoint(value) {
+  return Math.floor(value * 28.346456693)
+}
+
+function pointToCentimeter(value) {
+  return Math.floor(value / 28.346456693)
 }
 
 /**
@@ -265,8 +327,8 @@ function pixelToPoint(pixel) {
  * @returns {number} Width in point 
  */
 function getPageWidth(doc) {
-    const body = doc.getBody()
-    return body.getPageWidth() - body.getMarginLeft() - body.getMarginRight()
+  const body = doc.getBody()
+  return body.getPageWidth() - body.getMarginLeft() - body.getMarginRight()
 }
 
 /**
@@ -276,23 +338,24 @@ function getPageWidth(doc) {
  * @returns {number} Height in point 
  */
 function getPageHeight(doc) {
-    const body = doc.getBody()
-    return body.getPageHeight() - body.getMarginTop() - body.getMarginBotton()
+  const body = doc.getBody()
+  return body.getPageHeight() - body.getMarginTop() - body.getMarginBotton()
 }
 
 if (typeof module === "object") {
-    module.exports = {
-        getParagraphByKeyword,
-        getTableByName,
-        replaceTextPlaceholders,
-        replaceImagePlaceholders,
-        replaceTablePlaceholders,
-        pointToPixel,
-        pixelToPoint,
-        exportDocToPdf,
-        getPageWidth,
-        getPageHeight,
-        insertImage,
-        insertTable,
-    }
+  module.exports = {
+    createDoc,
+    getParagraphByKeyword,
+    getTableByName,
+    replaceTextPlaceholders,
+    replaceImagePlaceholders,
+    replaceTablePlaceholders,
+    pointToPixel,
+    pixelToPoint,
+    exportDocToPdf,
+    getPageWidth,
+    getPageHeight,
+    insertImage,
+    insertTable,
+  }
 }
